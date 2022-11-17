@@ -2,6 +2,7 @@ package rk.enkidu.hiparent.ui.authentification
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,6 +29,17 @@ class LoginActivity : AppCompatActivity() {
 
         //animation
         setupAnimation()
+
+        //go to registration page
+        toRegister()
+
+    }
+
+    private fun toRegister(){
+        binding?.tvToRegister?.setOnClickListener {
+            intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupAnimation() {
@@ -63,6 +75,5 @@ class LoginActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
-
 
 }

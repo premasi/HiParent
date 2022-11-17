@@ -9,4 +9,17 @@
     <string name="password_text">Password</string>
     <string name="to_register">Belum punya akun?</string>
     <string name="login">Login</string>
+    <string name="email_address">Alamat email</string>
+    <string name="input_password">Masukan password</string>
+
+    <!-- Register Activity   -->
+    <string name="iv_back_to_login">iv_back_to_login</string>
+    <string name="advertise_text">Buat Akun Baru</string>
+    <string name="fullname">Nama Lengkap</string>
+    <string name="Input_fullname">Masukan nama lengkap</string>
+    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="retype_password">Masukan ulang password</string>
+    <string name="to_login">Sudah punya akun?</string>
+    <string name="create_account">Buat Akun</string>
+
 </resources>
