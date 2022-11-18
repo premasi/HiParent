@@ -1,16 +1,19 @@
 package rk.enkidu.hiparent.ui.home
 
-import android.app.Activity
-import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.databinding.ActivityHomeBinding
-import rk.enkidu.hiparent.ui.authentification.LoginActivity
+import rk.enkidu.hiparent.ui.home.fragments.HomeFragment
+import rk.enkidu.hiparent.ui.home.fragments.ProfileFragment
+import rk.enkidu.hiparent.ui.home.fragments.SettingsFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,14 +30,50 @@ class HomeActivity : AppCompatActivity() {
         //setup firebase auth
         auth = Firebase.auth
 
-        binding?.btnLogout?.setOnClickListener {
-            auth.signOut()
+        //close top bar
+        setupView()
 
-            Toast.makeText(this@HomeActivity, "logout berhasil", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this@HomeActivity as Activity).toBundle())
+        //change fragment
+        setupFragment()
+
+//        binding?.btnLogout?.setOnClickListener {
+//            auth.signOut()
+//
+//            Toast.makeText(this@HomeActivity, "logout berhasil", Toast.LENGTH_SHORT).show()
+//            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this@HomeActivity as Activity).toBundle())
+//        }
+    }
+
+    private fun setupFragment() {
+        replaceFragment(HomeFragment())
+        binding?.bottomNavigationView?.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.bn_home -> replaceFragment(HomeFragment())
+                R.id.bn_profile -> replaceFragment(ProfileFragment())
+                R.id.bn_settings -> replaceFragment(SettingsFragment())
+                else -> {}
+            }
+            true
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fl_home, fragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+        supportActionBar?.hide()
     }
 
     override fun onDestroy() {
