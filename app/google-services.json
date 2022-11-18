@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "517345034917",
+    "project_id": "hiparent-75a60",
+    "storage_bucket": "hiparent-75a60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517345034917:android:aee636378dd5203e6b834c",
+        "android_client_info": {
+          "package_name": "rk.enkidu.hiparent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517345034917-nks41v8nto9qa1bqissqg8tvvvgvn57q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN6lzQK8LcoOjxSwZv7Vf9wZbFXO3Pq-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517345034917-nks41v8nto9qa1bqissqg8tvvvgvn57q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

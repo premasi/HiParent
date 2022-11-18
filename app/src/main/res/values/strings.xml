@@ -11,6 +11,8 @@
     <string name="login">Login</string>
     <string name="email_address">Alamat email</string>
     <string name="input_password">Masukan password</string>
+    <string name="login_success_message">Login berhasil</string>
+    <string name="login_failed_message">Login tidak berhasil</string>
 
     <!-- Register Activity   -->
     <string name="iv_back_to_login">iv_back_to_login</string>
@@ -21,5 +23,14 @@
     <string name="retype_password">Masukan ulang password</string>
     <string name="to_login">Sudah punya akun?</string>
     <string name="create_account">Buat Akun</string>
+    <string name="email_is_empty_error">Email tidak boleh kosong</string>
+    <string name="password_is_empty_error">Password tidak boleh kosong</string>
+    <string name="confirm_is_empty_error">Konfirmasi password tidak boleh kosong</string>
+    <string name="confirm_not_equal_password_error">Konfirmasi password tidak sesuai</string>
+    <string name="password_short_than_8_error">Password harus lebih panjang dari 8 karakter</string>
+    <string name="create_success_message">Akun berhasil dibuat</string>
+    <string name="create_failed_message">Akun tidak berhasil dibuat :(</string>
+    <string name="fullname_empty_error">Name lengkap tidak boleh kosong</string>
+    <string name="email_not_valid_message">Email tidak valid</string>
 
 </resources>
