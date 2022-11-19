@@ -14,16 +14,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.bumptech.glide.Glide
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import rk.enkidu.hiparent.R
+import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.FragmentProfileBinding
+import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.viewmodel.ProfileViewModel
 import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment() {
@@ -35,6 +38,8 @@ class ProfileFragment : Fragment() {
     private lateinit var firebaseStorage: FirebaseStorage
 
     private lateinit var imageUri : Uri
+
+    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,51 +53,108 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //close loading
+        //state
         showLoading(false)
+        showEtFullname(false)
+        showTvFullname(true)
+        showIvChangeFullname(true)
 
         //setup firebase auth
         auth = Firebase.auth
         firebaseStorage = Firebase.storage
 
+        val user = auth.currentUser
+
+        //setup viewModel
+        profileViewModel = ViewModelProvider(viewModelStore, ViewModelFactory.getInstance(auth))[ProfileViewModel::class.java]
+
         //set data
-        setupData()
-    }
+        setupData(user)
 
-    private fun setupData() {
-//        val user = auth.currentUser
-//
-//        if (user != null){
-//            if(user.photoUrl != null ){
-//                Picasso.get().load(user.photoUrl).into(binding?.ivProfile)
-//            } else {
-//                Picasso.get().load("https://ibb.co/FhVFxgp").into(binding?.ivProfile)
-//            }
-//        }
-
-        //activated camera
+        //set camera
         setupCamera()
 
-        //save data
-//        binding?.btnSave?.setOnClickListener {
-//            val image = when{
-//                ::imageUri.isInitialized -> imageUri //upload
-//                user?.photoUrl == null -> Uri.parse("https://ibb.co/FhVFxgp") //tidak ada foto
-//                else -> user.photoUrl //setelah foto diupload
-//            }
-//
-//            UserProfileChangeRequest.Builder()
-//                .setPhotoUri(image)
-//                .build().also {
-//                    user?.updateProfile(it)?.addOnCompleteListener {
-//                        if(it.isSuccessful){
-//                            Toast.makeText(requireActivity(), getString(R.string.update_success), Toast.LENGTH_SHORT).show()
-//                        } else {
-//                            Toast.makeText(requireActivity(), getString(R.string.update_failed), Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//        }
+        //change fullname is clicked
+        changeTypeFullname()
+
+        //save update profile
+        saveUpdate(user)
+    }
+
+    private fun changeTypeFullname() {
+        binding?.ivChangeFullname?.setOnClickListener {
+            showTvFullname(false)
+            showIvChangeFullname(false)
+            showEtFullname(true)
+        }
+    }
+
+    private fun saveUpdate(user: FirebaseUser?) {
+        binding?.btnSave?.setOnClickListener {
+            val fullname = binding?.etFullnameTextProfile?.text.toString()
+
+            when{
+                fullname.isEmpty() -> {
+                    binding?.etFullnameTextProfile?.error = getString(R.string.fullname_empty_error)
+                }
+                fullname.length > 30 -> {
+                    binding?.etFullnameTextProfile?.error = getString(R.string.max_fullname_char)
+                }
+                else -> {
+                    save(user, fullname)
+                }
+            }
+        }
+    }
+
+    private fun save(user: FirebaseUser?, fullname: String) {
+        val image = when{
+            ::imageUri.isInitialized -> imageUri //upload
+            user?.photoUrl == null -> Uri.parse("https://picsum.photos/id/106/200/300") //tidak ada foto
+            else -> user.photoUrl //setelah foto diupload
+        }
+
+        profileViewModel.updateProfile(image!!, fullname).observe(viewLifecycleOwner){ result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Success -> {
+                        showLoading(false)
+                        showIvChangeFullname(true)
+                        showTvFullname(true)
+                        showEtFullname(false)
+                        Toast.makeText(activity, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Error -> {
+                        showLoading(false)
+                        Toast.makeText(activity, getString(R.string.update_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupData(user: FirebaseUser?) {
+        if (user != null){
+            //set fullname
+            binding?.tvFullnameTextProfile?.setText(user.displayName)
+
+            //set et fullname
+            binding?.etFullnameTextProfile?.setText(user.displayName)
+
+            //set email
+            binding?.tvEmailTextProfile?.text = user.email
+
+            if(user.photoUrl != null ){
+                //set image
+                Picasso.get().load(user.photoUrl).into(binding?.ivProfile)
+            } else {
+                Picasso.get().load("https://picsum.photos/id/106/200/300").into(binding?.ivProfile)
+            }
+        }
+
     }
 
     private fun setupCamera() {
@@ -152,6 +214,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbProfile?.visibility = if (isLoading) View.VISIBLE else View.GONE }
+
+    private fun showTvFullname(isShow: Boolean){ binding?.tvFullnameTextProfile?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
+
+    private fun showEtFullname(isShow: Boolean){ binding?.etFullnameTextProfile?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
+
+    private fun showIvChangeFullname(isShow: Boolean){ binding?.ivChangeFullname?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
 
     companion object{
         private const val REQUEST_CODE_PERMISSION = 10

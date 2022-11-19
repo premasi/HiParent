@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import rk.enkidu.hiparent.data.repository.Repository
 import rk.enkidu.hiparent.di.Injection
 import rk.enkidu.hiparent.logic.viewmodel.LoginViewModel
+import rk.enkidu.hiparent.logic.viewmodel.ProfileViewModel
 import rk.enkidu.hiparent.logic.viewmodel.RegistrationViewModel
 
 class ViewModelFactory (private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
@@ -15,6 +16,8 @@ class ViewModelFactory (private val repository: Repository) : ViewModelProvider.
             return RegistrationViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(LoginViewModel::class.java)){
             return LoginViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)){
+            return ProfileViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

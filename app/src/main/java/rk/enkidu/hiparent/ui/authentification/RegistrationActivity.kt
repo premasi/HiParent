@@ -41,6 +41,7 @@ class RegistrationActivity : AppCompatActivity() {
         //close loading onCreate
         showLoading(false)
 
+
         //setup firebase auth
         auth = Firebase.auth
 
@@ -71,6 +72,9 @@ class RegistrationActivity : AppCompatActivity() {
                 fullname.isEmpty() -> {
                     binding?.etlFullname?.error = getString(R.string.fullname_empty_error)
                 }
+                fullname.length > 30 -> {
+                    binding?.etlFullname?.error = getString(R.string.max_fullname_char)
+                }
                 email.isEmpty() -> {
                     binding?.etlEmailRegis?.error = getString(R.string.email_is_empty_error)
                 }
@@ -91,7 +95,7 @@ class RegistrationActivity : AppCompatActivity() {
                 }
                 else -> {
 
-                    registrationViewModel.createUser(email, password).observe(this@RegistrationActivity){ result ->
+                    registrationViewModel.createUser(fullname, email, password).observe(this@RegistrationActivity){ result ->
                         if (result != null) {
                             when (result) {
                                 is Result.Loading -> {

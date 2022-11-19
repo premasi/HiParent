@@ -32,16 +32,24 @@
     <string name="create_failed_message">Akun tidak berhasil dibuat :(</string>
     <string name="fullname_empty_error">Name lengkap tidak boleh kosong</string>
     <string name="email_not_valid_message">Email tidak valid</string>
+    <string name="max_fullname_char">Maksimal 30 kata</string>
 
     <!-- Home   -->
     <!-- Profile Fragment   -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="foto_profile">foto_profile</string>
-    <string name="bio_text">Bio</string>
     <string name="save_profile">Save Profile</string>
     <string name="permission_failed">Tidak mendapatkan permission.</string>
     <string name="update_success">Profile terupdate</string>
     <string name="update_failed">Profile gagal terupdate</string>
+    <string name="change_fullname">change_fullname</string>
 
+    <!-- Setting Fragment   -->
+    <string name="language">Bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="alert">Pemberitahuan</string>
+    <string name="confirmation">Apakah anda yakin ingin keluar?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
 
 </resources>
