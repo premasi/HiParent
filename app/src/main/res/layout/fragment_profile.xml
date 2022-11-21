@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bg"
     tools:context=".ui.home.fragments.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/Theme.HiParent"
         tools:context=".ui.home.fragments.ProfileFragment">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -20,6 +20,8 @@
             android:layout_marginTop="16dp"
             android:contentDescription="@string/foto_profile"
             android:src="@drawable/ic_baseline_account_circle_24"
+            app:civ_border_color="@color/pink"
+            app:civ_border_width="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,11 +47,13 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:padding="16dp"
             app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivProfile"
-            android:padding="16dp">
+            app:layout_constraintTop_toBottomOf="@+id/ivProfile">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -70,11 +74,11 @@
                     android:id="@+id/tv_fullname_text_profile_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/fullname"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_fullname_text_profile"
@@ -109,6 +113,18 @@
                     android:layout_marginTop="8dp"
                     android:contentDescription="@string/change_fullname"
                     android:src="@drawable/ic_baseline_brush_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_fullname_text_profile_title"
+                    app:tint="@color/pink" />
+
+                <ImageView
+                    android:id="@+id/iv_change_fullname_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/change_fullname"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_fullname_text_profile_title"
                     app:tint="@color/pink" />

@@ -7,7 +7,6 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <application
         android:allowBackup="true"
@@ -21,8 +20,8 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="false"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|uiMode|smallestScreenSize">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

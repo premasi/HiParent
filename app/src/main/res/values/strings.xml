@@ -43,6 +43,7 @@
     <string name="update_success">Profile terupdate</string>
     <string name="update_failed">Profile gagal terupdate</string>
     <string name="change_fullname">change_fullname</string>
+    <string name="update_confirmation">Apakah anda yakin untuk menyimpan perubahan?</string>
 
     <!-- Setting Fragment   -->
     <string name="language">Bahasa</string>
@@ -51,5 +52,18 @@
     <string name="confirmation">Apakah anda yakin ingin keluar?</string>
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
+
+    <!-- Home Fragment   -->
+    <string name="halo">Halo</string>
+    <string name="desc_home">Bagaimana kabar kamu hari ini?</string>
+    <string name="banner">banner</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="diskusi">Diskusi</string>
+    <string name="discus_advertise">Ayo bergabung!</string>
+    <string name="join">Join</string>
 
 </resources>

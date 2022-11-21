@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -77,8 +78,23 @@ class ProfileFragment : Fragment() {
         //change fullname is clicked
         changeTypeFullname()
 
+        //close change fullname is clicked
+        closeEditFullname()
+
         //save update profile
         saveUpdate(user)
+    }
+
+    private fun closeEditFullname() {
+        binding?.ivChangeFullnameClose?.setOnClickListener {
+            showTvFullname(true)
+            showIvChangeFullname(true)
+            showEtFullname(false)
+            showIvChangeFullnameClose(false)
+
+            //change name to before
+            binding?.etFullnameTextProfile?.setText(auth.currentUser?.displayName)
+        }
     }
 
     private fun changeTypeFullname() {
@@ -86,6 +102,7 @@ class ProfileFragment : Fragment() {
             showTvFullname(false)
             showIvChangeFullname(false)
             showEtFullname(true)
+            showIvChangeFullnameClose(true)
         }
     }
 
@@ -101,7 +118,16 @@ class ProfileFragment : Fragment() {
                     binding?.etFullnameTextProfile?.error = getString(R.string.max_fullname_char)
                 }
                 else -> {
-                    save(user, fullname)
+                    AlertDialog.Builder(requireActivity()).apply {
+                        setTitle(getString(R.string.alert))
+                        setMessage(getString(R.string.update_confirmation))
+                        setNegativeButton(getString(R.string.no)) { _, _ -> }
+                        setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            save(user, fullname)
+                        }
+                        create()
+                        show()
+                    }
                 }
             }
         }
@@ -125,7 +151,11 @@ class ProfileFragment : Fragment() {
                         showIvChangeFullname(true)
                         showTvFullname(true)
                         showEtFullname(false)
+                        showIvChangeFullnameClose(false)
                         Toast.makeText(activity, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+
+                        //setup data after update
+                        setupData(auth.currentUser)
                     }
                     is Result.Error -> {
                         showLoading(false)
@@ -213,6 +243,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
+
     private fun showLoading(isLoading: Boolean){ binding?.pbProfile?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
     private fun showTvFullname(isShow: Boolean){ binding?.tvFullnameTextProfile?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
@@ -220,6 +251,8 @@ class ProfileFragment : Fragment() {
     private fun showEtFullname(isShow: Boolean){ binding?.etFullnameTextProfile?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
 
     private fun showIvChangeFullname(isShow: Boolean){ binding?.ivChangeFullname?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
+
+    private fun showIvChangeFullnameClose(isShow: Boolean){ binding?.ivChangeFullnameClose?.visibility = if (isShow) View.VISIBLE else View.INVISIBLE }
 
     companion object{
         private const val REQUEST_CODE_PERMISSION = 10
