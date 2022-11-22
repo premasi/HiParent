@@ -36,14 +36,6 @@ class HomeActivity : AppCompatActivity() {
         //change fragment
         setupFragment()
 
-//        binding?.btnLogout?.setOnClickListener {
-//            auth.signOut()
-//
-//            Toast.makeText(this@HomeActivity, "logout berhasil", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this@HomeActivity as Activity).toBundle())
-//        }
     }
 
     private fun setupFragment() {

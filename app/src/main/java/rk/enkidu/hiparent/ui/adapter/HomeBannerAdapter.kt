@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import rk.enkidu.hiparent.data.entity.Banner
+import rk.enkidu.hiparent.data.entity.local.Banner
 import rk.enkidu.hiparent.databinding.BannerContainerBinding
 
 class HomeBannerAdapter(private val imageList : List<Banner>) : RecyclerView.Adapter<HomeBannerAdapter.BannerViewHolder>(){

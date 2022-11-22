@@ -17,4 +17,7 @@
     <color name="red">#D22B2B</color>
 
     <attr format="color" name="bg"/>
+    <attr format="color" name="cv"/>
+    <attr format="color" name="etl_stroke"/>
+
 </resources>

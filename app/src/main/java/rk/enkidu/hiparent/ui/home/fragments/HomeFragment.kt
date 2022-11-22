@@ -1,5 +1,7 @@
 package rk.enkidu.hiparent.ui.home.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -8,15 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import rk.enkidu.hiparent.R
-import rk.enkidu.hiparent.data.entity.Banner
+import rk.enkidu.hiparent.data.entity.local.Banner
 import rk.enkidu.hiparent.databinding.FragmentHomeBinding
 import rk.enkidu.hiparent.ui.adapter.HomeBannerAdapter
+import rk.enkidu.hiparent.ui.forum.ForumActivity
 
 class HomeFragment : Fragment() {
 
@@ -50,6 +54,16 @@ class HomeFragment : Fragment() {
         //setup add banner image
         addBannerImage()
 
+        //go to forum
+        goToForum()
+
+    }
+
+    private fun goToForum() {
+        binding?.btnGoDiscus?.setOnClickListener {
+            val intent = Intent(requireActivity(), ForumActivity::class.java)
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity() as Activity).toBundle())
+        }
     }
 
     private fun addBannerImage() {

@@ -66,4 +66,32 @@
     <string name="discus_advertise">Ayo bergabung!</string>
     <string name="join">Join</string>
 
+    <!--  Forum Activity  -->
+    <string name="tab_text_1">Semua</string>
+    <string name="tab_text_2">Postingan Saya</string>
+    <string name="create_new_discuss">Buat diskusi baru</string>
+    <string name="result_failed">Kamu belum membuat postingan</string>
+    <string name="result_empty">Belum ada postingan</string>
+
+    <!--  Add New Disucss Activity -->
+    <string name="title">Judul</string>
+    <string name="input_title">Maksimal 50 kata</string>
+    <string name="desc">Deskripsi</string>
+    <string name="max_word">Maksimal 1000 kata</string>
+    <string name="upload">Unggah</string>
+    <string name="title_empty_message">Judul tidak boleh kosong</string>
+    <string name="desc_empty_message">Deskripsi tidak boleh kosong</string>
+    <string name="upload_success">Diskusi berhasil diunggah</string>
+    <string name="upload_failed">Diskusi gagal diunggah</string>
+    <string name="by">Dibuat oleh</string>
+
+    <!-- OnBoarding Activity   -->
+    <string name="welcome_boarding_1">Selamat Datang Parent</string>
+    <string name="welcome_boarding_2">Tips-Tips Yang beragam</string>
+    <string name="welcome_boarding_3">Fitur Chat</string>
+    <string name="welcome_desc_boarding_1">Yuk mulai jelajahi dunia Parenting yang lebih baik</string>
+    <string name="welcome_desc_boarding_2">Beragam tips-tips bermanfaat</string>
+    <string name="welcome_desc_boarding_3">Berdiskusi dengan sesama Parent</string>
+    <string name="get_started">Ayo Mulai</string>
+    <string name="next">Selanjutnya</string>
 </resources>

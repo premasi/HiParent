@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +20,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import rk.enkidu.hiparent.R
+import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.FragmentProfileBinding
 import rk.enkidu.hiparent.logic.helper.ViewModelFactory
@@ -37,6 +41,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firebaseStorage: FirebaseStorage
+    private lateinit var db: FirebaseDatabase
 
     private lateinit var imageUri : Uri
 
@@ -63,6 +68,7 @@ class ProfileFragment : Fragment() {
         //setup firebase auth
         auth = Firebase.auth
         firebaseStorage = Firebase.storage
+        db = Firebase.database
 
         val user = auth.currentUser
 
@@ -156,6 +162,11 @@ class ProfileFragment : Fragment() {
 
                         //setup data after update
                         setupData(auth.currentUser)
+
+                        //update realtime
+                        val name = result.data.displayName
+                        val photo = result.data.photoUri
+                        fetchData(name.toString(), photo.toString())
                     }
                     is Result.Error -> {
                         showLoading(false)
@@ -165,6 +176,30 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchData(name: String, photo: String) {
+        profileViewModel.fetchDiscussion()
+
+        profileViewModel.discuss.observe(requireActivity()){
+            if(it != null){
+                val id = it[0].id
+                val uid = it[0].uid
+                if(uid.toString() == auth.currentUser?.uid){
+                    updateRealtime(id.toString(), name, photo)
+                }
+
+            }
+        }
+    }
+
+    private fun updateRealtime(id: String, name: String, photo: String) {
+        val ref = db.reference
+        ref.child("Discussion").child(id).child("name").setValue(name)
+        ref.child("Discussion").child(id).child("photoUrl").setValue(photo)
+
+    }
+
+
 
     private fun setupData(user: FirebaseUser?) {
         if (user != null){

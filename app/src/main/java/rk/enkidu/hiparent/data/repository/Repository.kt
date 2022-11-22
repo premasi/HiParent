@@ -2,10 +2,17 @@ package rk.enkidu.hiparent.data.repository
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.data.utils.await
 
@@ -51,11 +58,32 @@ class Repository(private val auth: FirebaseAuth) {
                 .build().also {
                     auth.currentUser?.updateProfile(it)?.await()
                 }
+
             emit(Result.Success(result))
 
         } catch (e: Exception){
             e.printStackTrace()
             emit(Result.Error("Failed"))
         }
+    }
+
+    fun fetchDiscussion(liveData: MutableLiveData<List<Discussion>>){
+        val db = Firebase.database
+        val ref = db.getReference("Discussion")
+
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val discuss : List<Discussion> = snapshot.children.map {
+                    it.getValue(Discussion::class.java)!!.copy(id = it.key!!)
+                }
+
+                liveData.postValue(discuss)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //nothing to do
+            }
+
+        })
     }
 }
