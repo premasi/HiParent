@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -86,4 +87,25 @@ class Repository(private val auth: FirebaseAuth) {
 
         })
     }
+
+    fun updatePostNameAndPhoto(id: String, name: String, photo: String){
+        val db = Firebase.database
+        val ref = db.reference
+        ref.child("Discussion").child(id).child("name").setValue(name)
+        ref.child("Discussion").child(id).child("photoUrl").setValue(photo)
+    }
+
+    fun deletePostDiscussion(id: String){
+        val discussRef = FirebaseDatabase.getInstance().getReference("Discussion").child(id)
+        discussRef.removeValue()
+    }
+
+    fun updatePostDiscussion(id: String, title: String, desc: String){
+        val db = Firebase.database
+        val discussRef = db.reference.child("Discussion")
+        discussRef.child(id).child("title").setValue(title)
+        discussRef.child(id).child("desc").setValue(desc)
+    }
+
+
 }

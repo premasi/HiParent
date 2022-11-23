@@ -72,10 +72,14 @@
     <string name="create_new_discuss">Buat diskusi baru</string>
     <string name="result_failed">Kamu belum membuat postingan</string>
     <string name="result_empty">Belum ada postingan</string>
+    <string name="no_post">Tidak ada postingan</string>
+    <string name="edit">Edit</string>
 
     <!--  Add New Disucss Activity -->
     <string name="title">Judul</string>
-    <string name="input_title">Maksimal 50 kata</string>
+    <string name="input_title">Masukan judul</string>
+    <string name="input_desc">Masukan deskripsi</string>
+    <string name="max_word_t">Maksimal 50 kata</string>
     <string name="desc">Deskripsi</string>
     <string name="max_word">Maksimal 1000 kata</string>
     <string name="upload">Unggah</string>
@@ -94,4 +98,11 @@
     <string name="welcome_desc_boarding_3">Berdiskusi dengan sesama Parent</string>
     <string name="get_started">Ayo Mulai</string>
     <string name="next">Selanjutnya</string>
+
+    <!-- Edit Activity   -->
+    <string name="update">Ubah</string>
+    <string name="delete">Hapus</string>
+    <string name="update_confirm">Apakah anda yaking ingin merubah postingan?</string>
+    <string name="delete_confirm">Apakah anda yakin ingin menghapus postingan?</string>
+    <string name="delete_success">Postingan berhasil dihapus</string>
 </resources>

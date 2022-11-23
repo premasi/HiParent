@@ -12,6 +12,7 @@ import androidx.core.app.ActivityOptionsCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.databinding.ActivityForumBinding
+import rk.enkidu.hiparent.ui.forum.add.AddNewDiscussActivity
 import rk.enkidu.hiparent.ui.forum.pager.SectionPagerAdapter
 
 class ForumActivity : AppCompatActivity() {

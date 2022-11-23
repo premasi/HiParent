@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentAllPostBinding
 import rk.enkidu.hiparent.ui.adapter.DiscussionAdapter
@@ -51,21 +55,45 @@ class AllPostFragment : Fragment() {
 
     private fun showData() {
         val ref = db.reference.child("Discussion")
-        val manager = LinearLayoutManager(requireActivity())
-        binding?.rvAllDiscussion?.layoutManager = manager
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                showLoading(false)
+                if(snapshot.exists()){
+                    adapter = DiscussionAdapter()
 
-        val options = FirebaseRecyclerOptions.Builder<Discussion>()
-            .setQuery(ref, Discussion::class.java)
-            .build()
+                    for(data in snapshot.children){
+                        val someData = data.getValue(Discussion::class.java)
 
-        adapter = DiscussionAdapter(options)
-        binding?.rvAllDiscussion?.adapter = adapter
-        showLoading(false)
+                        val list = ArrayList<Discussion>()
+                        list.add(someData!!)
+
+                        adapter.setList(list)
+                    }
+
+                    val manager = LinearLayoutManager(activity)
+                    binding?.rvAllDiscussion?.layoutManager = manager
+                    binding?.rvAllDiscussion?.adapter = adapter
+                } else {
+                    Toast.makeText(requireActivity(), getString(R.string.no_post), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //nothing to do
+                showLoading(false)
+            }
+
+        })
     }
 
     override fun onResume() {
+        showData()
         super.onResume()
-        adapter.startListening()
+    }
+
+    override fun onPause() {
+        showLoading(false)
+        super.onPause()
     }
 
     override fun onDestroy() {

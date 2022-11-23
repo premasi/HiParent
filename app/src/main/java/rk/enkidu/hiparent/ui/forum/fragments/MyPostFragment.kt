@@ -72,10 +72,11 @@ class MyPostFragment : Fragment() {
                         adapter.setList(list)
                     }
 
-                    val manager = LinearLayoutManager(requireActivity())
+                    val manager = LinearLayoutManager(activity)
                     binding?.rvAllDiscussionPrivate?.layoutManager = manager
                     binding?.rvAllDiscussionPrivate?.adapter = adapter
                 } else {
+                    showLoading(false)
                     Toast.makeText(requireActivity(), getString(R.string.result_failed), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -86,6 +87,11 @@ class MyPostFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onResume() {
+        showDiscussion()
+        super.onResume()
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbAllDiscussPrivate?.visibility = if (isLoading) View.VISIBLE else View.GONE }
