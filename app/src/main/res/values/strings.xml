@@ -105,4 +105,6 @@
     <string name="update_confirm">Apakah anda yaking ingin merubah postingan?</string>
     <string name="delete_confirm">Apakah anda yakin ingin menghapus postingan?</string>
     <string name="delete_success">Postingan berhasil dihapus</string>
+    <string name="input_message">Tuliskan komentar</string>
+    <string name="message">Komentar</string>
 </resources>

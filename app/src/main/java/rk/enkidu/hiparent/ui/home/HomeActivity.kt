@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.databinding.ActivityHomeBinding
 import rk.enkidu.hiparent.ui.home.fragments.HomeFragment
@@ -39,15 +42,17 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupFragment() {
-        replaceFragment(HomeFragment())
-        binding?.bottomNavigationView?.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.bn_home -> replaceFragment(HomeFragment())
-                R.id.bn_profile -> replaceFragment(ProfileFragment())
-                R.id.bn_settings -> replaceFragment(SettingsFragment())
-                else -> {}
+        CoroutineScope(Dispatchers.Main).launch {
+            replaceFragment(HomeFragment())
+            binding?.bottomNavigationView?.setOnItemSelectedListener {
+                when(it.itemId){
+                    R.id.bn_home -> replaceFragment(HomeFragment())
+                    R.id.bn_profile -> replaceFragment(ProfileFragment())
+                    R.id.bn_settings -> replaceFragment(SettingsFragment())
+                    else -> {}
+                }
+                true
             }
-            true
         }
     }
 

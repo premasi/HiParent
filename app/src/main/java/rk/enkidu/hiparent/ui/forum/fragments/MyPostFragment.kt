@@ -59,8 +59,8 @@ class MyPostFragment : Fragment() {
         val query = ref.orderByChild("uid").equalTo(auth.currentUser?.uid)
         query.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                showLoading(false)
                 if(snapshot.exists()){
-                    showLoading(false)
                     adapter = DiscussionPrivateAdapter()
 
                     for(data in snapshot.children){
@@ -73,10 +73,11 @@ class MyPostFragment : Fragment() {
                     }
 
                     val manager = LinearLayoutManager(activity)
+                    manager.reverseLayout = true
+                    manager.stackFromEnd = true
                     binding?.rvAllDiscussionPrivate?.layoutManager = manager
                     binding?.rvAllDiscussionPrivate?.adapter = adapter
                 } else {
-                    showLoading(false)
                     Toast.makeText(requireActivity(), getString(R.string.result_failed), Toast.LENGTH_SHORT).show()
                 }
             }

@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity as Activity)
                         .toBundle()
                 )
+                delay(4000)
                 finish()
             }
         } else {
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity as Activity)
                         .toBundle()
                 )
+                delay(4000)
                 finish()
             }
         }

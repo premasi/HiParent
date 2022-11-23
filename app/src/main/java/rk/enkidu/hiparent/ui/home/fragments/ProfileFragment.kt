@@ -176,12 +176,13 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.discuss.observe(requireActivity()){
             if(it != null){
-                val id = it[0].id
-                val uid = it[0].uid
-                if(uid.toString() == auth.currentUser?.uid){
-                    updateRealtime(id.toString(), name, photo)
+                for(i in 0 until it.size){
+                    val id = it[i].id
+                    val uid = it[i].uid
+                    if(uid.toString() == auth.currentUser?.uid){
+                        updateRealtime(id.toString(), name, photo)
+                    }
                 }
-
             }
         }
     }

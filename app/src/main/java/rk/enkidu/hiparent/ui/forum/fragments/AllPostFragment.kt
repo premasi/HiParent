@@ -15,6 +15,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentAllPostBinding
@@ -54,10 +58,14 @@ class AllPostFragment : Fragment() {
     }
 
     private fun showData() {
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            showLoading(false)
+        }
+
         val ref = db.reference.child("Discussion")
         ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                showLoading(false)
                 if(snapshot.exists()){
                     adapter = DiscussionAdapter()
 
@@ -71,6 +79,8 @@ class AllPostFragment : Fragment() {
                     }
 
                     val manager = LinearLayoutManager(activity)
+                    manager.reverseLayout = true
+                    manager.stackFromEnd = true
                     binding?.rvAllDiscussion?.layoutManager = manager
                     binding?.rvAllDiscussion?.adapter = adapter
                 } else {
@@ -80,7 +90,6 @@ class AllPostFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {
                 //nothing to do
-                showLoading(false)
             }
 
         })
@@ -91,10 +100,6 @@ class AllPostFragment : Fragment() {
         super.onResume()
     }
 
-    override fun onPause() {
-        showLoading(false)
-        super.onPause()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
