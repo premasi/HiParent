@@ -44,6 +44,7 @@
     <string name="update_failed">Profile gagal terupdate</string>
     <string name="change_fullname">change_fullname</string>
     <string name="update_confirmation">Apakah anda yakin untuk menyimpan perubahan?</string>
+    <string name="change_photo_message">Butuh waktu yang lebih supaya foto profile dapat berubah</string>
 
     <!-- Setting Fragment   -->
     <string name="language">Bahasa</string>
@@ -104,7 +105,12 @@
     <string name="delete">Hapus</string>
     <string name="update_confirm">Apakah anda yaking ingin merubah postingan?</string>
     <string name="delete_confirm">Apakah anda yakin ingin menghapus postingan?</string>
+
+    <!-- Detail Activity   -->
     <string name="delete_success">Postingan berhasil dihapus</string>
     <string name="input_message">Tuliskan komentar</string>
     <string name="message">Komentar</string>
+    <string name="comment_isempty">Komentar tidak boleh kosong</string>
+    <string name="send_failed">Pesan gagal terikirm</string>
+    <string name="send_success">Pesan terikirm</string>
 </resources>

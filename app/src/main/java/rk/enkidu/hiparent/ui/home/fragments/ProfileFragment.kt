@@ -23,6 +23,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.FragmentProfileBinding
@@ -161,6 +165,7 @@ class ProfileFragment : Fragment() {
                         val name = result.data.displayName
                         val photo = result.data.photoUri
                         fetchData(name.toString(), photo.toString())
+                        fetchComments(name.toString(), photo.toString())
                     }
                     is Result.Error -> {
                         showLoading(false)
@@ -169,6 +174,26 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun fetchComments(name: String, photo: String) {
+        profileViewModel.fetchComments()
+
+        profileViewModel.message.observe(requireActivity()){
+            if(it != null){
+                for (i in 0 until it.size){
+                    val id = it[i].id
+                    val uid = it[i].uid
+                    if(uid.toString() == auth.currentUser?.uid){
+                        updateRealtimeComment(id.toString(), name, photo)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateRealtimeComment(id: String, name: String, photo: String) {
+        profileViewModel.updateNameAndProfileComments(id, name, photo)
     }
 
     private fun fetchData(name: String, photo: String) {

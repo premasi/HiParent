@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import rk.enkidu.hiparent.data.entity.remote.Discussion
+import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.data.utils.await
 
@@ -105,6 +106,33 @@ class Repository(private val auth: FirebaseAuth) {
         val discussRef = db.reference.child("Discussion")
         discussRef.child(id).child("title").setValue(title)
         discussRef.child(id).child("desc").setValue(desc)
+    }
+
+    fun fetchComment(liveData: MutableLiveData<List<Message>>){
+        val db = Firebase.database
+        val ref = db.getReference("Comments")
+
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val message : List<Message> = snapshot.children.map {
+                    it.getValue(Message::class.java)!!.copy(id = it.key!!)
+                }
+
+                liveData.postValue(message)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //nothing to do
+            }
+
+        })
+    }
+
+    fun updatePostNameAndPhotoComments(id: String, name: String, photo: String){
+        val db = Firebase.database
+        val ref = db.reference
+        ref.child("Comments").child(id).child("name").setValue(name)
+        ref.child("Comments").child(id).child("photo").setValue(photo)
     }
 
 

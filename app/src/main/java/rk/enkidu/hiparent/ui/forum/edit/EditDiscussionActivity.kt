@@ -73,7 +73,6 @@ class EditDiscussionActivity : AppCompatActivity() {
                     editDiscussionViewModel.deletePost(id)
 
                     Toast.makeText(this@EditDiscussionActivity, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
-
                     CoroutineScope(Dispatchers.Main).launch {
                         delay(2000)
                         showLoading(false)
@@ -85,6 +84,7 @@ class EditDiscussionActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun updateData(data: Discussion) {
         binding?.btnUpdateDiscuss?.setOnClickListener {

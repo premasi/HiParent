@@ -49,7 +49,7 @@ class MyPostFragment : Fragment() {
         auth = Firebase.auth
         db = Firebase.database
 
-        //fetch data
+        //show data
         showDiscussion()
     }
 
