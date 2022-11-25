@@ -65,6 +65,15 @@ class DetailActivity : AppCompatActivity() {
 
         //send comment
         sendComment(dataDetail.id.toString())
+
+        //close
+        close()
+    }
+
+    private fun close() {
+        binding?.ivBack?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun showComments(id: String) {

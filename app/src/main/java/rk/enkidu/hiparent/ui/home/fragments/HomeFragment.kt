@@ -21,6 +21,7 @@ import rk.enkidu.hiparent.data.entity.local.Banner
 import rk.enkidu.hiparent.databinding.FragmentHomeBinding
 import rk.enkidu.hiparent.ui.adapter.HomeBannerAdapter
 import rk.enkidu.hiparent.ui.forum.ForumActivity
+import rk.enkidu.hiparent.ui.tips.ChildrenTipsActivity
 
 class HomeFragment : Fragment() {
 
@@ -57,6 +58,16 @@ class HomeFragment : Fragment() {
         //go to forum
         goToForum()
 
+        //go to children tips
+        goToChildren()
+
+    }
+
+    private fun goToChildren() {
+        binding?.btnTips?.setOnClickListener {
+            val intent = Intent(requireActivity(), ChildrenTipsActivity::class.java)
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity() as Activity).toBundle())
+        }
     }
 
     private fun goToForum() {

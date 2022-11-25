@@ -43,7 +43,7 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif"
             android:shadowColor="@color/black"
-            android:text="Next"
+            android:text="@string/next"
             android:textSize="16sp"
             android:textColor="@color/pink"
             android:textStyle="bold"

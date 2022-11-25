@@ -19,6 +19,22 @@
         android:theme="@style/Theme.HiParent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.tips.detail.DetailTipsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tips.ChildrenTipsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.forum.detail.DetailActivity"
             android:exported="false"
             android:screenOrientation="portrait">

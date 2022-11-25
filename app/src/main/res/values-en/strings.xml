@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HiParent</string>
+
+    <!-- Login Activity   -->
+    <string name="login_illustration">Login_illustration</string>
+    <string name="welcome_back">Welcome!</string>
+    <string name="welcome_description">Let\'s share stories as parents</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="to_register">Don\'t have an account?</string>
+    <string name="login">Login</string>
+    <string name="email_address">Email address</string>
+    <string name="input_password">Input password</string>
+    <string name="login_success_message">Login success</string>
+    <string name="login_failed_message">Login failed</string>
+
+    <!-- Register Activity   -->
+    <string name="iv_back_to_login">iv_back_to_login</string>
+    <string name="advertise_text">Create New Account</string>
+    <string name="fullname">Full Name</string>
+    <string name="Input_fullname">Input your name</string>
+    <string name="confirm_password">Confirmation Password</string>
+    <string name="retype_password">Re-type your password</string>
+    <string name="to_login">Already have account?</string>
+    <string name="create_account">Create Account</string>
+    <string name="email_is_empty_error">Email cannot be empty</string>
+    <string name="password_is_empty_error">Password cannot be empty</string>
+    <string name="confirm_is_empty_error">Confirmation password cannot be empty</string>
+    <string name="confirm_not_equal_password_error">Confirmation password is not equal</string>
+    <string name="password_short_than_8_error">Password must be longer than 8</string>
+    <string name="create_success_message">Create account success</string>
+    <string name="create_failed_message">Create account failed :(</string>
+    <string name="fullname_empty_error">Full name cannot be empty</string>
+    <string name="email_not_valid_message">Email is not valid</string>
+    <string name="max_fullname_char">Maximum words 30</string>
+
+    <!-- Home   -->
+    <!-- Profile Fragment   -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="foto_profile">foto_profile</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="permission_failed">You don\'t have permission.</string>
+    <string name="update_success">Profile update</string>
+    <string name="update_failed">Profile update failed</string>
+    <string name="change_fullname">change_fullname</string>
+    <string name="update_confirmation">Are you sure want save new profile?</string>
+    <string name="change_photo_message">Need more time so image change can be seen</string>
+
+    <!-- Setting Fragment   -->
+    <string name="language">Language (Indonesian, English(USA))</string>
+    <string name="logout">Logout</string>
+    <string name="alert">Alert</string>
+    <string name="confirmation">Are you sure want to logout?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="dark_theme">Dark theme</string>
+
+    <!-- Home Fragment   -->
+    <string name="halo">Hello</string>
+    <string name="desc_home">How are you today?</string>
+    <string name="banner">Banner</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="diskusi">Discussion</string>
+    <string name="discus_advertise">Come join!</string>
+    <string name="join">Join</string>
+    <string name="tips_parenting">Tips Parenting</string>
+    <string name="read_now">Read now</string>
+    <string name="age_children">Ages 0 - 5 years </string>
+
+    <!--  Forum Activity  -->
+    <string name="tab_text_1">All</string>
+    <string name="tab_text_2">My Post</string>
+    <string name="create_new_discuss">Create new discussion</string>
+    <string name="result_failed">You haven\'t created a post yet</string>
+    <string name="result_empty">No posts yet</string>
+    <string name="no_post">No posts yet</string>
+    <string name="edit">Edit</string>
+
+    <!--  Add New Disucss Activity -->
+    <string name="title">Title</string>
+    <string name="input_title">Input title</string>
+    <string name="input_desc">Input description</string>
+    <string name="max_word_t">Maximum words 50</string>
+    <string name="desc">Description</string>
+    <string name="max_word">Maximum words 1000</string>
+    <string name="upload">Upload</string>
+    <string name="title_empty_message">Title cannot be empty</string>
+    <string name="desc_empty_message">Description cannot be empty</string>
+    <string name="upload_success">Discussion upload success</string>
+    <string name="upload_failed">Discussion upload failed</string>
+    <string name="by">Created by</string>
+
+    <!-- OnBoarding Activity   -->
+    <string name="welcome_boarding_1">Welcome Back Parent</string>
+    <string name="welcome_boarding_2">More Tips For You</string>
+    <string name="welcome_boarding_3">Feature Chat</string>
+    <string name="welcome_desc_boarding_1">Let\'s start exploring a better world of Parenting</string>
+    <string name="welcome_desc_boarding_2">Lots of useful tips</string>
+    <string name="welcome_desc_boarding_3">Discuss with fellow parents</string>
+    <string name="get_started">Let\'s start</string>
+    <string name="next">Next</string>
+
+    <!-- Edit Activity   -->
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="update_confirm">Are you sure you want to change the post?</string>
+    <string name="delete_confirm">Are you sure you want to delete the post?</string>
+
+    <!-- Detail Activity   -->
+    <string name="delete_success">Post successfully deleted</string>
+    <string name="input_message">Write a comment</string>
+    <string name="message">Comments</string>
+    <string name="comment_isempty">Comment cannot be empty</string>
+    <string name="send_failed">Comment failed to send</string>
+    <string name="send_success">Comment success to send</string>
+    <string name="no_materi">No material</string>
+</resources>

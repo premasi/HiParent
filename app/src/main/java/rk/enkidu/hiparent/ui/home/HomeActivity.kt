@@ -1,11 +1,17 @@
 package rk.enkidu.hiparent.ui.home
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -13,7 +19,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
+import rk.enkidu.hiparent.data.preferences.SettingsPreferences
 import rk.enkidu.hiparent.databinding.ActivityHomeBinding
+import rk.enkidu.hiparent.logic.helper.SettingsViewModelFactory
+import rk.enkidu.hiparent.logic.viewmodel.SettingsViewModel
 import rk.enkidu.hiparent.ui.home.fragments.HomeFragment
 import rk.enkidu.hiparent.ui.home.fragments.ProfileFragment
 import rk.enkidu.hiparent.ui.home.fragments.SettingsFragment
@@ -25,10 +34,16 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    //setting theme
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        //setting theme
+        settingTheme()
 
         //setup firebase auth
         auth = Firebase.auth
@@ -39,6 +54,19 @@ class HomeActivity : AppCompatActivity() {
         //change fragment
         setupFragment()
 
+    }
+
+    private fun settingTheme(){
+        val pref = SettingsPreferences.getInstance(dataStore)
+        val settingsViewModel = ViewModelProvider(this, SettingsViewModelFactory(pref))[SettingsViewModel::class.java]
+
+        settingsViewModel.getThemeSettings().observe(this){
+            if(it){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     private fun setupFragment() {

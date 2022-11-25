@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    //datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     //androidx
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
