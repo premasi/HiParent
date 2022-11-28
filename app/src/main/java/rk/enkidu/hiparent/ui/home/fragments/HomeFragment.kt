@@ -61,11 +61,33 @@ class HomeFragment : Fragment() {
         //go to children tips
         goToChildren()
 
+        //go to kid tips
+        goToKid()
+
+        //go to teen tips
+        goToTeen()
+    }
+
+    private fun goToTeen() {
+        binding?.btnTipsTeen?.setOnClickListener {
+            val intent = Intent(requireActivity(), ChildrenTipsActivity::class.java)
+            intent.putExtra(ChildrenTipsActivity.TYPE, getString(R.string.teen))
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity() as Activity).toBundle())
+        }
+    }
+
+    private fun goToKid() {
+        binding?.btnTipsKid?.setOnClickListener {
+            val intent = Intent(requireActivity(), ChildrenTipsActivity::class.java)
+            intent.putExtra(ChildrenTipsActivity.TYPE, getString(R.string.kid))
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity() as Activity).toBundle())
+        }
     }
 
     private fun goToChildren() {
         binding?.btnTips?.setOnClickListener {
             val intent = Intent(requireActivity(), ChildrenTipsActivity::class.java)
+            intent.putExtra(ChildrenTipsActivity.TYPE, getString(R.string.children))
             startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity() as Activity).toBundle())
         }
     }

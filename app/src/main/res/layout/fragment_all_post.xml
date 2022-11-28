@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.forum.fragments.AllPostFragment">
 
-
-
     <ProgressBar
         android:id="@+id/pb_all_discuss"
         style="?android:progressBarStyle"

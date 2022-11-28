@@ -70,7 +70,13 @@
     <string name="join">Join</string>
     <string name="tips_parenting">Tips Parenting</string>
     <string name="read_now">Read now</string>
-    <string name="age_children">Ages 0 - 5 years </string>
+    <string name="age_children">Ages 0 – 5 Years </string>
+    <string name="age_children_kid">Ages 6 – 12 Years</string>
+    <string name="age_children_teen">Ages 13 – 17 Years</string>
+    <string name="illustration">Illustration</string>
+    <string name="teen">TeenEN</string>
+    <string name="kid">KidEN</string>
+    <string name="children">ChildrenEN</string>
 
     <!--  Forum Activity  -->
     <string name="tab_text_1">All</string>

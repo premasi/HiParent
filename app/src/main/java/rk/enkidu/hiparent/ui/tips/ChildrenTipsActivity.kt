@@ -32,6 +32,8 @@ class ChildrenTipsActivity : AppCompatActivity() {
 
     private lateinit var adapter: TipsAdapter
 
+    private lateinit var id: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityChildrenTipsBinding.inflate(layoutInflater)
@@ -42,6 +44,9 @@ class ChildrenTipsActivity : AppCompatActivity() {
 
         //set firebase auth
         db = Firebase.database
+
+        //get type
+        id = intent.getStringExtra(TYPE)!!
 
         //close
         close()
@@ -61,11 +66,11 @@ class ChildrenTipsActivity : AppCompatActivity() {
 
     private fun showData() {
         CoroutineScope(Dispatchers.Main).launch {
-            delay(1000)
+            delay(2000)
             showLoading(false)
         }
 
-        val ref = db.reference.child("Children")
+        val ref = db.reference.child(id)
         ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
@@ -107,10 +112,19 @@ class ChildrenTipsActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    override fun onResume() {
+        showData()
+        super.onResume()
+    }
+
     private fun showLoading(isLoading: Boolean){ binding?.pbShowTips?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object{
+        const val TYPE = "extra_type"
     }
 }

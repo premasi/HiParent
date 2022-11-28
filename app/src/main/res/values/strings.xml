@@ -69,7 +69,13 @@
     <string name="join">Join</string>
     <string name="tips_parenting">Tips Parenting</string>
     <string name="read_now">Baca sekarang</string>
-    <string name="age_children">Usia 0 - 5 Tahun</string>
+    <string name="age_children">Usia 0 – 5 Tahun</string>
+    <string name="age_children_kid">Usia 6 – 12 Tahun</string>
+    <string name="age_children_teen">Usia 13 – 17 Tahun</string>
+    <string name="illustration">illustrasi</string>
+    <string name="teen">Teen</string>
+    <string name="kid">Kid</string>
+    <string name="children">Children</string>
 
     <!--  Forum Activity  -->
     <string name="tab_text_1">Semua</string>
@@ -118,4 +124,5 @@
     <string name="send_failed">Pesan gagal terikirm</string>
     <string name="send_success">Pesan terikirm</string>
     <string name="no_materi">Tidak ada materi</string>
+
 </resources>
