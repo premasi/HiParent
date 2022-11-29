@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
         android:clickable="true"
         android:contentDescription="@string/iv_back_to_login"
@@ -32,12 +32,24 @@
         app:tint="@color/white_tint" />
 
     <TextView
+        android:id="@+id/tv_activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/create_account"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white_tint"
+        app:layout_constraintStart_toEndOf="@+id/iv_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tv_advertise_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="64dp"
+        android:alpha="0"
         android:text="@string/advertise_text"
         android:textColor="@color/black"
         android:textSize="24sp"

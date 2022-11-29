@@ -60,9 +60,19 @@ class LoginActivity : AppCompatActivity() {
         //go to registration page
         toRegister()
 
+        //go to reset page
+        toReset()
+
         //login user
         setupLogin()
 
+    }
+
+    private fun toReset() {
+        binding?.tvToReset?.setOnClickListener {
+            intent = Intent(this@LoginActivity, ResetPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupLogin() {
@@ -135,11 +145,13 @@ class LoginActivity : AppCompatActivity() {
         val emailETL = ObjectAnimator.ofFloat(binding?.etlEmail, View.ALPHA, 1F).setDuration(500)
         val passwordText = ObjectAnimator.ofFloat(binding?.tvPasswordText, View.ALPHA, 1F).setDuration(500)
         val passwordETL = ObjectAnimator.ofFloat(binding?.etlPassword, View.ALPHA, 1F).setDuration(500)
+        val toReset = ObjectAnimator.ofFloat(binding?.tvToReset, View.ALPHA, 1F).setDuration(500)
         val toRegister = ObjectAnimator.ofFloat(binding?.tvToRegister, View.ALPHA, 1F).setDuration(500)
+        val toRegisterText = ObjectAnimator.ofFloat(binding?.tvTextToRegister, View.ALPHA, 1F).setDuration(500)
         val loginBtn = ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, 1F).setDuration(500)
 
         AnimatorSet().apply {
-            playSequentially(image, welcomeText, welcomeDesc, emailText, emailETL, passwordText, passwordETL, toRegister, loginBtn)
+            playSequentially(image, welcomeText, welcomeDesc, emailText, emailETL, passwordText, passwordETL, toReset, loginBtn, toRegisterText, toRegister)
             start()
         }
     }

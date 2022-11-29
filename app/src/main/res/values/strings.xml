@@ -13,6 +13,8 @@
     <string name="input_password">Masukan password</string>
     <string name="login_success_message">Login berhasil</string>
     <string name="login_failed_message">Login tidak berhasil</string>
+    <string name="forgot_password">Lupa password?</string>
+    <string name="klik_disini">Klik disini</string>
 
     <!-- Register Activity   -->
     <string name="iv_back_to_login">iv_back_to_login</string>
@@ -124,5 +126,14 @@
     <string name="send_failed">Pesan gagal terikirm</string>
     <string name="send_success">Pesan terikirm</string>
     <string name="no_materi">Tidak ada materi</string>
+
+    <!-- Reset Password Activity   -->
+    <string name="reset_password">Reset Password</string>
+    <string name="masukan_alamat_email">Masukan Alamat Email</string>
+    <string name="reset">Reset</string>
+    <string name="success_reset">Periksa email untuk mengganti password</string>
+    <string name="failed_reset">Mengganti password tidak bisa dilakukan</string>
+
+
 
 </resources>
