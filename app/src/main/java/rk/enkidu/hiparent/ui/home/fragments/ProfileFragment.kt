@@ -87,10 +87,7 @@ class ProfileFragment : Fragment() {
 
     private fun closeEditFullname() {
         binding?.ivChangeFullnameClose?.setOnClickListener {
-            showTvFullname(true)
-            showIvChangeFullname(true)
-            showEtFullname(false)
-            showIvChangeFullnameClose(false)
+            setState(state1 = true, state2 = true, state3 = false, state4 = false)
 
             //change name to before
             binding?.etFullnameTextProfile?.setText(auth.currentUser?.displayName)
@@ -99,11 +96,15 @@ class ProfileFragment : Fragment() {
 
     private fun changeTypeFullname() {
         binding?.ivChangeFullname?.setOnClickListener {
-            showTvFullname(false)
-            showIvChangeFullname(false)
-            showEtFullname(true)
-            showIvChangeFullnameClose(true)
+            setState(state1 = false, state2 = false, state3 = true, state4 = true)
         }
+    }
+
+    private fun setState(state1: Boolean, state2: Boolean, state3: Boolean, state4: Boolean){
+        showTvFullname(state1)
+        showIvChangeFullname(state2)
+        showEtFullname(state3)
+        showIvChangeFullnameClose(state4)
     }
 
     private fun saveUpdate(user: FirebaseUser?) {
@@ -148,10 +149,7 @@ class ProfileFragment : Fragment() {
                     }
                     is Result.Success -> {
                         showLoading(false)
-                        showIvChangeFullname(true)
-                        showTvFullname(true)
-                        showEtFullname(false)
-                        showIvChangeFullnameClose(false)
+                        setState(state1 = true, state2 = true, state3 = false, state4 = false)
                         Toast.makeText(activity, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
 
                         //setup data after update
@@ -177,7 +175,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.message.observe(requireActivity()){
             if(it != null){
-                for (i in 0 until it.size){
+                for (i in it.indices){
                     val id = it[i].id
                     val uid = it[i].uid
                     if(uid.toString() == auth.currentUser?.uid){
@@ -197,7 +195,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.discuss.observe(requireActivity()){
             if(it != null){
-                for(i in 0 until it.size){
+                for(i in it.indices){
                     val id = it[i].id
                     val uid = it[i].uid
                     if(uid.toString() == auth.currentUser?.uid){
@@ -217,7 +215,7 @@ class ProfileFragment : Fragment() {
     private fun setupData(user: FirebaseUser?) {
         if (user != null){
             //set fullname
-            binding?.tvFullnameTextProfile?.setText(user.displayName)
+            binding?.tvFullnameTextProfile?.text = user.displayName
 
             //set et fullname
             binding?.etFullnameTextProfile?.setText(user.displayName)

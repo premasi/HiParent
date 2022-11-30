@@ -1,12 +1,18 @@
+@file:Suppress("DEPRECATION")
+
 package rk.enkidu.hiparent.ui.forum
 
 import android.app.Activity
+import android.app.Service
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,6 +25,9 @@ class ForumActivity : AppCompatActivity() {
 
     private var _binding : ActivityForumBinding? = null
     private val binding get() = _binding
+
+    private var connectivity: ConnectivityManager? = null
+    private var info: NetworkInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +42,31 @@ class ForumActivity : AppCompatActivity() {
 
         //add new discussion
         addDiscuss()
+
+        //check internet
+        checkInternet()
     }
 
     private fun addDiscuss() {
         binding?.btnAddNewDiscuss?.setOnClickListener {
             intent = Intent(this@ForumActivity, AddNewDiscussActivity::class.java)
             startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this@ForumActivity as Activity).toBundle())
+        }
+    }
+
+    private fun checkInternet() {
+        connectivity = this@ForumActivity.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if(connectivity != null){
+            info = connectivity!!.activeNetworkInfo
+
+            if(info != null){
+                if(info!!.state == NetworkInfo.State.CONNECTED){
+                    //do nothing
+                }
+            } else {
+                Toast.makeText(this@ForumActivity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

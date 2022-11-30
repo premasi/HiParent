@@ -1,5 +1,6 @@
 package rk.enkidu.hiparent.ui.adapter
 
+import android.content.Intent
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.databinding.ListCommentBinding
+import rk.enkidu.hiparent.ui.forum.detail.DetailCommentActivity
 
 class CommentAdapter: RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
     private val list = ArrayList<Message>()
@@ -27,6 +29,12 @@ class CommentAdapter: RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
             if(data.timestamp != null){
                 item.tvTimestamp.text = DateUtils.getRelativeTimeSpanString(data.timestamp)
+            }
+
+            itemView.setOnClickListener {
+                val intent = Intent(it.context, DetailCommentActivity::class.java)
+                intent.putExtra(DetailCommentActivity.DATA, data)
+                itemView.context.startActivity(intent)
             }
         }
     }

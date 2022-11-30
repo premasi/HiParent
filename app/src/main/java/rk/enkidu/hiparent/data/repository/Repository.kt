@@ -135,5 +135,16 @@ class Repository(private val auth: FirebaseAuth) {
         ref.child("Comments").child(id).child("photo").setValue(photo)
     }
 
+    fun updateTextComment(id: String, text: String){
+        val db = Firebase.database
+        val ref = db.reference
+        ref.child("Comments").child(id).child("text").setValue(text)
+    }
+
+    fun deleteComment(id: String){
+        val ref = FirebaseDatabase.getInstance().getReference("Comments").child(id)
+        ref.removeValue()
+    }
+
 
 }

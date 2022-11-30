@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HiParent</string>
+    <string name="no_internet">There is no internet</string>
 
     <!-- Login Activity   -->
     <string name="login_illustration">Login_illustration</string>
@@ -134,4 +135,9 @@
     <string name="reset">Reset</string>
     <string name="success_reset">Check email for reset password</string>
     <string name="failed_reset">Reset password is failed</string>
+
+    <!-- Detail Comment Activity   -->
+    <string name="confirm_delete_comment">Are you sure want to delete this comment?</string>
+    <string name="delete_comment_message_success">Comment delete</string>
+    <string name="update_text_succes">Comment update</string>
 </resources>

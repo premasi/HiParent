@@ -1,5 +1,10 @@
+@file:Suppress("DEPRECATION")
+
 package rk.enkidu.hiparent.ui.tips
 
+import android.app.Service
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +39,9 @@ class ChildrenTipsActivity : AppCompatActivity() {
 
     private lateinit var id: String
 
+    private var connectivity: ConnectivityManager? = null
+    private var info: NetworkInfo? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityChildrenTipsBinding.inflate(layoutInflater)
@@ -51,11 +59,30 @@ class ChildrenTipsActivity : AppCompatActivity() {
         //close
         close()
 
+        //check internet
+        checkInternet()
+
         //close top bar
         setupView()
 
         //show data
         showData()
+    }
+
+    private fun checkInternet() {
+        connectivity = this@ChildrenTipsActivity.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if(connectivity != null){
+            info = connectivity!!.activeNetworkInfo
+
+            if(info != null){
+                if(info!!.state == NetworkInfo.State.CONNECTED){
+                    //do nothing
+                }
+            } else {
+                Toast.makeText(this@ChildrenTipsActivity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun close() {

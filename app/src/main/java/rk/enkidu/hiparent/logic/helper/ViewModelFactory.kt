@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import rk.enkidu.hiparent.data.repository.Repository
 import rk.enkidu.hiparent.di.Injection
-import rk.enkidu.hiparent.logic.viewmodel.EditDiscussionViewModel
-import rk.enkidu.hiparent.logic.viewmodel.LoginViewModel
-import rk.enkidu.hiparent.logic.viewmodel.ProfileViewModel
-import rk.enkidu.hiparent.logic.viewmodel.RegistrationViewModel
+import rk.enkidu.hiparent.logic.viewmodel.*
 
 class ViewModelFactory (private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -21,6 +18,8 @@ class ViewModelFactory (private val repository: Repository) : ViewModelProvider.
             return ProfileViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(EditDiscussionViewModel::class.java)){
             return EditDiscussionViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(CommentsViewModel::class.java)){
+            return CommentsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

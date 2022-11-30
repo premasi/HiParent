@@ -1,11 +1,17 @@
+@file:Suppress("DEPRECATION")
+
 package rk.enkidu.hiparent.ui.home
 
+import android.app.Service
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -34,6 +40,9 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    private var connectivity: ConnectivityManager? = null
+    private var info: NetworkInfo? = null
+
     //setting theme
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -54,6 +63,25 @@ class HomeActivity : AppCompatActivity() {
         //change fragment
         setupFragment()
 
+        //check internet
+        checkInternet()
+
+    }
+
+    private fun checkInternet() {
+        connectivity = this@HomeActivity.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if(connectivity != null){
+            info = connectivity!!.activeNetworkInfo
+
+            if(info != null){
+                if(info!!.state == NetworkInfo.State.CONNECTED){
+                    //do nothing
+                }
+            } else {
+                Toast.makeText(this@HomeActivity, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun settingTheme(){
