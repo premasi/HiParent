@@ -19,10 +19,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Tips
 import rk.enkidu.hiparent.databinding.ActivityChildrenTipsBinding
@@ -149,6 +146,7 @@ class ChildrenTipsActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 
     companion object{

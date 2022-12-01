@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/Theme.HiParent"
-        android:padding="16dp"
-        tools:context=".ui.forum.edit.EditDiscussionActivity">
+        android:theme="@style/Theme.HiParent"
+        tools:context=".ui.home.add.AddAlarmActivity">
 
         <ProgressBar
-            android:id="@+id/pb_edit_discuss"
+            android:id="@+id/pb_add_alarm"
             style="?android:progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,10 +37,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/input_title"
             app:boxStrokeColor="?attr/etl_stroke"
-            app:boxStrokeWidth="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title">
@@ -52,71 +50,88 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:gravity="top|start"
-                android:inputType="textMultiLine|textNoSuggestions"
+                android:inputType="textEmailAddress"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_desc"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/desc"
+            android:text="@string/day"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etl_title" />
+            app:layout_constraintTop_toBottomOf="@id/etl_title" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etl_desc"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_date"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/input_desc"
-            app:boxStrokeColor="?attr/etl_stroke"
-            app:boxStrokeWidth="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/illustration"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc">
+            app:layout_constraintTop_toBottomOf="@+id/tv_date"
+            android:src="@drawable/ic_baseline_calendar_month_24"
+            app:tint="@color/pink" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="top|start"
-                android:inputType="textMultiLine|textNoSuggestions"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_delete_discuss"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/red"
-            android:text="@string/delete"
-            app:layout_constraintEnd_toStartOf="@+id/btn_update_discuss"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etl_desc" />
-
-        <Button
-            android:id="@+id/btn_update_discuss"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_date_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/update"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_delete_discuss"
-            app:layout_constraintTop_toBottomOf="@+id/etl_desc" />
+            android:layout_marginTop="28dp"
+            android:text="@string/date_fake"
+            app:layout_constraintStart_toEndOf="@+id/iv_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/date"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date_text" />
+
+        <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/illustration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time"
+            android:src="@drawable/ic_baseline_access_time_24"
+            app:tint="@color/pink" />
+
+        <TextView
+            android:id="@+id/tv_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/time_fake"
+            app:layout_constraintStart_toEndOf="@+id/iv_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_time" />
+
+        <Button
+            android:id="@+id/btn_add_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/create_alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+

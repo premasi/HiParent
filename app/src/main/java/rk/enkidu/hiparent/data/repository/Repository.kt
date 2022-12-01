@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import rk.enkidu.hiparent.data.entity.remote.Alarm
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.data.result.Result
@@ -146,5 +147,24 @@ class Repository(private val auth: FirebaseAuth) {
         ref.removeValue()
     }
 
+    fun fetchAlarm(liveData: MutableLiveData<List<Alarm>>){
+        val db = Firebase.database
+        val ref = db.getReference("Alarm")
+
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val data : List<Alarm> = snapshot.children.map {
+                    it.getValue(Alarm::class.java)!!.copy(id = it.key!!)
+                }
+
+                liveData.postValue(data)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //nothing to do
+            }
+
+        })
+    }
 
 }

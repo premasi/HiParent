@@ -16,14 +16,11 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.databinding.ActivityDetailCommentBinding
-import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.CommentsViewModel
 
 class DetailCommentActivity : AppCompatActivity() {
@@ -202,6 +199,7 @@ class DetailCommentActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbDetail?.visibility = if (isLoading) View.VISIBLE else View.GONE }

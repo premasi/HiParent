@@ -14,10 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentAllPostBinding
 import rk.enkidu.hiparent.ui.adapter.DiscussionAdapter
@@ -107,6 +104,7 @@ class AllPostFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbAllDiscuss?.visibility = if (isLoading) View.VISIBLE else View.GONE }

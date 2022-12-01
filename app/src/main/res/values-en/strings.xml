@@ -141,8 +141,19 @@
     <string name="delete_comment_message_success">Comment delete</string>
     <string name="update_text_succes">Comment update</string>
 
-    <!-- Search Activity   -->
-    <string name="search_result">Search Result</string>
-    <string name="search_empty">Search not found</string>
+    <!-- Fragment Alarm  -->
+    <string name="schedule">Schedule of Activities</string>
+    <string name="schedule_desc">Let\'s make schedule for the little one</string>
+    <string name="add_new_schedule">Add new schedule</string>
+    <string name="day">Date</string>
+    <string name="date">Time</string>
+    <string name="create_alarm">Create new schedule</string>
+    <string name="time_fake">HH:mm</string>
+    <string name="date_fake">yyyy-MM-dd</string>
+    <string name="date_error">Date was not set yet</string>
+    <string name="time_error">Time was not set yet</string>
+    <string name="add_alarm_fail">Activity failed to add</string>
+    <string name="add_alarm_success">Activity success to add</string>
+    <string name="no_schedule">There is no schedule</string>
 
 </resources>

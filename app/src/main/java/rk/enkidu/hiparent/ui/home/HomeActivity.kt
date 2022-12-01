@@ -23,12 +23,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.preferences.SettingsPreferences
 import rk.enkidu.hiparent.databinding.ActivityHomeBinding
-import rk.enkidu.hiparent.logic.helper.SettingsViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.SettingsViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.SettingsViewModel
+import rk.enkidu.hiparent.ui.home.fragments.AlarmFragment
 import rk.enkidu.hiparent.ui.home.fragments.HomeFragment
 import rk.enkidu.hiparent.ui.home.fragments.ProfileFragment
 import rk.enkidu.hiparent.ui.home.fragments.SettingsFragment
@@ -103,6 +105,7 @@ class HomeActivity : AppCompatActivity() {
             binding?.bottomNavigationView?.setOnItemSelectedListener {
                 when(it.itemId){
                     R.id.bn_home -> replaceFragment(HomeFragment())
+                    R.id.bn_alarm -> replaceFragment(AlarmFragment())
                     R.id.bn_profile -> replaceFragment(ProfileFragment())
                     R.id.bn_settings -> replaceFragment(SettingsFragment())
                     else -> {}
@@ -132,5 +135,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 }

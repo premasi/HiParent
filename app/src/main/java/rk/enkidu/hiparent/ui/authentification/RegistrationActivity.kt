@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.databinding.ActivityRegistrationBinding
-import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.RegistrationViewModel
 import rk.enkidu.hiparent.data.result.Result
 

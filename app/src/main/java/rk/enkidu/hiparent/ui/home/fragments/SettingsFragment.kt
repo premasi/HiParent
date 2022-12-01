@@ -21,7 +21,7 @@ import com.google.firebase.ktx.Firebase
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.preferences.SettingsPreferences
 import rk.enkidu.hiparent.databinding.FragmentSettingsBinding
-import rk.enkidu.hiparent.logic.helper.SettingsViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.SettingsViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.SettingsViewModel
 import rk.enkidu.hiparent.ui.authentification.LoginActivity
 

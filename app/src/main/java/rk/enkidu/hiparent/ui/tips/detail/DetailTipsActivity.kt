@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import rk.enkidu.hiparent.data.entity.remote.Tips
 import rk.enkidu.hiparent.databinding.ActivityDetailTipsBinding
 
@@ -69,6 +66,7 @@ class DetailTipsActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbDetailTips?.visibility = if (isLoading) View.VISIBLE else View.GONE }

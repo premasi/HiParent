@@ -14,14 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.ActivityEditDiscussionBinding
-import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.EditDiscussionViewModel
 
 class EditDiscussionActivity : AppCompatActivity() {
@@ -49,19 +46,18 @@ class EditDiscussionActivity : AppCompatActivity() {
 
         //get data
         val postDetail = intent.getParcelableExtra<Discussion>(DATA) as Discussion
-        val data = postDetail
 
-        binding?.etTitle?.setText(data.title)
-        binding?.etDesc?.setText(data.desc)
+        binding?.etTitle?.setText(postDetail.title)
+        binding?.etDesc?.setText(postDetail.desc)
 
         //close top bar
         setupView()
 
         //update data
-        updateData(data)
+        updateData(postDetail)
         
         //delete data
-        deleteData(data.id.toString())
+        deleteData(postDetail.id.toString())
     }
 
     private fun deleteData(id: String) {
@@ -149,6 +145,7 @@ class EditDiscussionActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        CoroutineScope(Dispatchers.Main).cancel()
     }
 
     companion object{

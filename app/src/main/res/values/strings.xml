@@ -140,9 +140,20 @@
     <string name="delete_comment_message_success">Komentar berhasil dihapus</string>
     <string name="update_text_succes">Komentar berhasil diperbarui</string>
 
-    <!-- Search Activity   -->
-    <string name="search_result">Hasil Pencarian</string>
-    <string name="search_empty">Pencarian tidak ditemukan</string>
+    <!-- Fragment Alarm  -->
+    <string name="schedule">Jadwal Kegiatan</string>
+    <string name="schedule_desc">Yuk jadwalin kegiatan sikecil</string>
+    <string name="add_new_schedule">Tambah jadwal kegiatan</string>
+    <string name="day">Hari/Tanggal</string>
+    <string name="date">Waktu</string>
+    <string name="create_alarm">Buat jadwal kegiatan</string>
+    <string name="time_fake">HH:mm</string>
+    <string name="date_fake">yyyy-MM-dd</string>
+    <string name="date_error">Hari/Tanggal belum di set</string>
+    <string name="time_error">Waktu belum di set</string>
+    <string name="add_alarm_fail">Kegiatan gagal ditambahkan</string>
+    <string name="add_alarm_success">Kegiatan berhasil ditambahkan</string>
+    <string name="no_schedule">Belum ada jadwal</string>
 
 
 </resources>

@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.ActivityLoginBinding
-import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.LoginViewModel
 import rk.enkidu.hiparent.ui.home.HomeActivity
 

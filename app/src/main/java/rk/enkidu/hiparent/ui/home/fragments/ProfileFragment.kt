@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.FragmentProfileBinding
-import rk.enkidu.hiparent.logic.helper.ViewModelFactory
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.ProfileViewModel
 import java.io.ByteArrayOutputStream
 
