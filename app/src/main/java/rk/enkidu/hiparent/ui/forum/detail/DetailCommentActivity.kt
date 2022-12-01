@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package rk.enkidu.hiparent.ui.forum.detail
 
 import android.os.Build

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package rk.enkidu.hiparent.ui.home.fragments
 
 import android.app.Activity

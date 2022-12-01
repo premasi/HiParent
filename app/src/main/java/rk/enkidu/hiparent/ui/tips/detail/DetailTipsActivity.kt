@@ -12,8 +12,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.data.entity.remote.Tips
 import rk.enkidu.hiparent.databinding.ActivityDetailTipsBinding
-import rk.enkidu.hiparent.ui.forum.detail.DetailActivity
 
+@Suppress("DEPRECATION")
 class DetailTipsActivity : AppCompatActivity() {
 
     private var _binding: ActivityDetailTipsBinding? = null
@@ -31,11 +31,10 @@ class DetailTipsActivity : AppCompatActivity() {
         setupView()
 
         //get data
-        val dataDetail = intent.getParcelableExtra<Tips>(DetailTipsActivity.DATA_DETAIL) as Tips
-        val data = dataDetail
+        val dataDetail = intent.getParcelableExtra<Tips>(DATA_DETAIL) as Tips
 
         //show data
-        showData(data)
+        showData(dataDetail)
 
         //close
         close()

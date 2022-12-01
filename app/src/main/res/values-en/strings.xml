@@ -140,4 +140,9 @@
     <string name="confirm_delete_comment">Are you sure want to delete this comment?</string>
     <string name="delete_comment_message_success">Comment delete</string>
     <string name="update_text_succes">Comment update</string>
+
+    <!-- Search Activity   -->
+    <string name="search_result">Search Result</string>
+    <string name="search_empty">Search not found</string>
+
 </resources>

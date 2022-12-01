@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +14,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import rk.enkidu.hiparent.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentMyPostBinding
 import rk.enkidu.hiparent.ui.adapter.DiscussionPrivateAdapter
@@ -44,6 +46,7 @@ class MyPostFragment : Fragment() {
 
         //show loading
         showLoading(true)
+        showEmpty(false)
 
         //setup firebase auth
         auth = Firebase.auth
@@ -78,7 +81,10 @@ class MyPostFragment : Fragment() {
                     binding?.rvAllDiscussionPrivate?.layoutManager = manager
                     binding?.rvAllDiscussionPrivate?.adapter = adapter
                 } else {
-                    Toast.makeText(requireActivity(), getString(R.string.result_failed), Toast.LENGTH_SHORT).show()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        showEmpty(true)
+                    }
                 }
             }
 
@@ -96,6 +102,8 @@ class MyPostFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbAllDiscussPrivate?.visibility = if (isLoading) View.VISIBLE else View.GONE }
+
+    private fun showEmpty(isLoading: Boolean){ binding?.tvEmpty?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
     override fun onDestroy() {
         super.onDestroy()

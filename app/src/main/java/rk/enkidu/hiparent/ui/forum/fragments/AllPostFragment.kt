@@ -1,11 +1,12 @@
 package rk.enkidu.hiparent.ui.forum.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,10 +20,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentAllPostBinding
 import rk.enkidu.hiparent.ui.adapter.DiscussionAdapter
+import rk.enkidu.hiparent.ui.forum.search.SearchResultActivity
 
 class AllPostFragment : Fragment() {
 
@@ -48,6 +49,7 @@ class AllPostFragment : Fragment() {
 
         //active loading
         showLoading(true)
+        showEmpty(false)
 
         //setup firebase auth
         auth = Firebase.auth
@@ -55,6 +57,28 @@ class AllPostFragment : Fragment() {
 
         //show data
         showData()
+
+        //search data
+        searchTitle()
+    }
+
+    private fun searchTitle(){
+        binding?.svPost?.setOnQueryTextListener(object : OnQueryTextListener{
+            override fun onQueryTextSubmit(newText: String?): Boolean {
+                if(newText != null){
+                    val intent = Intent(activity, SearchResultActivity::class.java)
+                    intent.putExtra(SearchResultActivity.QUERY, newText)
+                    startActivity(intent)
+                }
+                binding?.svPost?.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     private fun showData() {
@@ -84,7 +108,11 @@ class AllPostFragment : Fragment() {
                     binding?.rvAllDiscussion?.layoutManager = manager
                     binding?.rvAllDiscussion?.adapter = adapter
                 } else {
-                    Toast.makeText(requireActivity(), getString(R.string.no_post), Toast.LENGTH_SHORT).show()
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        showEmpty(true)
+                    }
                 }
             }
 
@@ -108,4 +136,5 @@ class AllPostFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean){ binding?.pbAllDiscuss?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
+    private fun showEmpty(isLoading: Boolean){ binding?.tvEmpty?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 }

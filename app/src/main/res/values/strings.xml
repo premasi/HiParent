@@ -140,6 +140,9 @@
     <string name="delete_comment_message_success">Komentar berhasil dihapus</string>
     <string name="update_text_succes">Komentar berhasil diperbarui</string>
 
+    <!-- Search Activity   -->
+    <string name="search_result">Hasil Pencarian</string>
+    <string name="search_empty">Pencarian tidak ditemukan</string>
 
 
 </resources>
