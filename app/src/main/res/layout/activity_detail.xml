@@ -8,16 +8,6 @@
     style="@style/Theme.HiParent"
     tools:context=".ui.forum.detail.DetailActivity">
 
-    <ProgressBar
-        android:id="@+id/pb_detail"
-        style="?android:progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="20dp"
@@ -180,7 +170,8 @@
                 android:layout_marginBottom="16dp"
                 android:padding="8dp"
                 android:background="?attr/bg"
-                android:inputType="text"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textNoSuggestions"
                 android:hint="@string/input_message"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_send"
@@ -202,6 +193,16 @@
                 app:tint="?attr/bg" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/pb_detail"
+        style="?android:progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 

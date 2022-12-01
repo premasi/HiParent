@@ -56,7 +56,7 @@ class AddNewDiscussActivity : AppCompatActivity() {
                 title.isEmpty() -> {
                     binding?.etlTitle?.error = getString(R.string.title_empty_message)
                 }
-                title.length > 50 -> {
+                title.length > 200 -> {
                     binding?.etlTitle?.error = getString(R.string.max_word_t)
                 }
                 desc.isEmpty() -> {

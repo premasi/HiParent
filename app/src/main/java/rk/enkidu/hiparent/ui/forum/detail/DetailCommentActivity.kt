@@ -16,6 +16,10 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.databinding.ActivityDetailCommentBinding
@@ -37,6 +41,7 @@ class DetailCommentActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         //close edit and delete
+        showLoading(false)
         setState(
             state1 = true,
             state2 = true,
@@ -114,6 +119,7 @@ class DetailCommentActivity : AppCompatActivity() {
 
     private fun updateComment(id: String) {
         binding?.ivUpdate?.setOnClickListener {
+            showLoading(true)
             val text = binding?.etComment?.text.toString()
 
             if(text.isEmpty()){
@@ -121,7 +127,13 @@ class DetailCommentActivity : AppCompatActivity() {
             } else {
                 commentsViewModel.updateComment(id, text)
                 Toast.makeText(this@DetailCommentActivity, getString(R.string.update_text_succes), Toast.LENGTH_SHORT).show()
-                finish()
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1500)
+                    showLoading(false)
+
+                    delay(2000)
+                    finish()
+                }
             }
         }
 
@@ -191,6 +203,8 @@ class DetailCommentActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
+
+    private fun showLoading(isLoading: Boolean){ binding?.pbDetail?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
     private fun showSend(isLoading: Boolean){ binding?.ivUpdate?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 

@@ -93,7 +93,7 @@
     <string name="title">Judul</string>
     <string name="input_title">Masukan judul</string>
     <string name="input_desc">Masukan deskripsi</string>
-    <string name="max_word_t">Maksimal 50 kata</string>
+    <string name="max_word_t">Maksimal 200 kata</string>
     <string name="desc">Deskripsi</string>
     <string name="max_word">Maksimal 1000 kata</string>
     <string name="upload">Unggah</string>

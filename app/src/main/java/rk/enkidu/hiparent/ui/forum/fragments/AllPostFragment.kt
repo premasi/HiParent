@@ -1,12 +1,10 @@
 package rk.enkidu.hiparent.ui.forum.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,7 +21,6 @@ import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.FragmentAllPostBinding
 import rk.enkidu.hiparent.ui.adapter.DiscussionAdapter
-import rk.enkidu.hiparent.ui.forum.search.SearchResultActivity
 
 class AllPostFragment : Fragment() {
 
@@ -57,28 +54,6 @@ class AllPostFragment : Fragment() {
 
         //show data
         showData()
-
-        //search data
-        searchTitle()
-    }
-
-    private fun searchTitle(){
-        binding?.svPost?.setOnQueryTextListener(object : OnQueryTextListener{
-            override fun onQueryTextSubmit(newText: String?): Boolean {
-                if(newText != null){
-                    val intent = Intent(activity, SearchResultActivity::class.java)
-                    intent.putExtra(SearchResultActivity.QUERY, newText)
-                    startActivity(intent)
-                }
-                binding?.svPost?.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-
-        })
     }
 
     private fun showData() {

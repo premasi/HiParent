@@ -94,7 +94,7 @@
     <string name="title">Title</string>
     <string name="input_title">Input title</string>
     <string name="input_desc">Input description</string>
-    <string name="max_word_t">Maximum words 50</string>
+    <string name="max_word_t">Maximum 200 word</string>
     <string name="desc">Description</string>
     <string name="max_word">Maximum words 1000</string>
     <string name="upload">Upload</string>
