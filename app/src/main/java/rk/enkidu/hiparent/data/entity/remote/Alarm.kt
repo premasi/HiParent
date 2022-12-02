@@ -11,5 +11,6 @@ data class Alarm(
     val date: String? = null,
     val time: String? = null,
     val title: String? = null,
+    val desc: String? = null,
     val uid: String? = null
 ) : Parcelable

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.HiParent"
-        tools:context=".ui.home.add.AddAlarmActivity">
+        tools:context=".ui.home.edit.EditAlarmActivity">
 
         <ProgressBar
             android:id="@+id/pb_add_alarm"
@@ -157,17 +157,29 @@
             app:layout_constraintTop_toBottomOf="@id/tv_time" />
 
         <Button
-            android:id="@+id/btn_add_alarm"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_delete_alarm"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/create_alarm"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/red"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toStartOf="@+id/btn_update_alarm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_time" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_time" />
+
+        <Button
+            android:id="@+id/btn_update_alarm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_alarm"
+            app:layout_constraintTop_toBottomOf="@+id/iv_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
-

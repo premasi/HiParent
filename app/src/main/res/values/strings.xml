@@ -118,6 +118,7 @@
     <string name="delete">Hapus</string>
     <string name="update_confirm">Apakah anda yaking ingin merubah postingan?</string>
     <string name="delete_confirm">Apakah anda yakin ingin menghapus postingan?</string>
+    <string name="update_success_discuss">Diskusi terupdate</string>
 
     <!-- Detail Activity   -->
     <string name="delete_success">Postingan berhasil dihapus</string>
@@ -154,6 +155,10 @@
     <string name="add_alarm_fail">Kegiatan gagal ditambahkan</string>
     <string name="add_alarm_success">Kegiatan berhasil ditambahkan</string>
     <string name="no_schedule">Belum ada jadwal</string>
+    <string name="max_desc_alarm">Maksimal 500 kata</string>
+    <string name="update_alarm_confirm">Apakah anda yaking ingin merubah jadwal?</string>
+    <string name="delete_alarm_confirm">Apakah anda yakin ingin menghapus jadwal?</string>
+    <string name="alarm_update_success">Jadwal diperbarui</string>
 
 
 </resources>

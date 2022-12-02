@@ -19,7 +19,7 @@ import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.ActivityEditDiscussionBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
-import rk.enkidu.hiparent.logic.viewmodel.EditDiscussionViewModel
+import rk.enkidu.hiparent.logic.viewmodel.DiscussionViewModel
 
 class EditDiscussionActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class EditDiscussionActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var editDiscussionViewModel: EditDiscussionViewModel
+    private lateinit var discussionViewModel: DiscussionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class EditDiscussionActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         //setup viewModel
-        editDiscussionViewModel = ViewModelProvider(this@EditDiscussionActivity, ViewModelFactory.getInstance(auth))[EditDiscussionViewModel::class.java]
+        discussionViewModel = ViewModelProvider(this@EditDiscussionActivity, ViewModelFactory.getInstance(auth))[DiscussionViewModel::class.java]
 
         //get data
         val postDetail = intent.getParcelableExtra<Discussion>(DATA) as Discussion
@@ -68,7 +68,7 @@ class EditDiscussionActivity : AppCompatActivity() {
                 setNegativeButton(getString(R.string.no)) { _, _ -> }
                 setPositiveButton(getString(R.string.yes)) { _, _ ->
                     showLoading(true)
-                    editDiscussionViewModel.deletePost(id)
+                    discussionViewModel.deletePost(id)
 
                     Toast.makeText(this@EditDiscussionActivity, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
                     CoroutineScope(Dispatchers.Main).launch {
@@ -109,9 +109,9 @@ class EditDiscussionActivity : AppCompatActivity() {
                         setNegativeButton(getString(R.string.no)){ _, _ -> }
                         setPositiveButton(getString(R.string.yes)) { _, _ ->
                             showLoading(true)
-                            editDiscussionViewModel.updatePost(data.id!!, title, desc)
+                            discussionViewModel.updatePost(data.id!!, title, desc)
 
-                            Toast.makeText(this@EditDiscussionActivity, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@EditDiscussionActivity, getString(R.string.update_success_discuss), Toast.LENGTH_SHORT).show()
 
                             CoroutineScope(Dispatchers.Main).launch {
                                 delay(2000)

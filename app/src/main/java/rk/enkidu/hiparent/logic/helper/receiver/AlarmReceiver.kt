@@ -10,7 +10,6 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import rk.enkidu.hiparent.R
@@ -20,29 +19,19 @@ import java.util.*
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        val type = intent?.getStringExtra(EXTRA_TYPE)
+        val title = intent?.getStringExtra(EXTRA_TITLE)
         val message = intent?.getStringExtra(EXTRA_MESSAGE)
 
-
-        showToast(context!!, type!!, message)
-
-        if (message != null) {
-            showNotification(context, type, message, ONE_TIME_ID)
+        if (title != null && message != null) {
+            showNotification(context!!, title, message)
         }
 
     }
 
-    private fun showToast(context: Context, title: String, message: String?) {
-        Toast.makeText(context, "$title : $message", Toast.LENGTH_LONG).show()
-    }
-
-    private fun showNotification(context: Context, title: String, message: String, notifId: Int){
-        val channelId = "channel_id"
-        val channelName = "Alarm Manager Channel"
-
+    private fun showNotification(context: Context, title: String, message: String){
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val builder = NotificationCompat.Builder(context, channelId)
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_access_time_24)
             .setContentTitle(title)
             .setContentText(message)
@@ -51,30 +40,30 @@ class AlarmReceiver : BroadcastReceiver() {
             .setSound(alarmSound)
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
 
             channel.enableVibration(true)
             channel.vibrationPattern = longArrayOf(1000,1000,1000,1000,1000)
 
-            builder.setChannelId(channelId)
+            builder.setChannelId(CHANNEL_ID)
 
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(notifId, builder.build())
+        notificationManager.notify(ONE_TIME_ID, builder.build())
     }
 
-    fun setOntimeAlarm(context: Context, type: String, date: String, time: String, message: String){
+    fun setOntimeAlarm(context: Context, title: String, date: String, time: String, message: String){
         if(isDateInvalid(date, DATE_FORMAT) || isDateInvalid(time, TIME_FORMAT)) return
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, message)
-        intent.putExtra(EXTRA_TYPE, type)
+        intent.putExtra(EXTRA_TITLE, title)
 
         Log.e("ONE TIME", "$date $time")
         val dateArray = date.split("-").toTypedArray()
-        val timeArray = time.split(":").toTypedArray()
+        val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
         val calender = Calendar.getInstance()
         calender.set(Calendar.YEAR, Integer.parseInt(dateArray[0]))
@@ -100,9 +89,10 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     companion object{
-        const val TYPE_ONE_TIME = "OneTimeAlarm"
+        const val CHANNEL_ID = "channel_id"
+        const val CHANNEL_NAME = "Alarm Manager Channel"
         const val EXTRA_MESSAGE = "extra_message"
-        const val EXTRA_TYPE = "extra_type"
+        const val EXTRA_TITLE = "extra_title"
 
         private const val ONE_TIME_ID = 100
 

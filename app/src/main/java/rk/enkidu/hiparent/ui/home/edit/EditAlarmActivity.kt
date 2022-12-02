@@ -1,4 +1,4 @@
-package rk.enkidu.hiparent.ui.home.add
+package rk.enkidu.hiparent.ui.home.edit
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,30 +7,41 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rk.enkidu.hiparent.R
 import rk.enkidu.hiparent.data.entity.remote.Alarm
-import rk.enkidu.hiparent.databinding.ActivityAddAlarmBinding
+import rk.enkidu.hiparent.databinding.ActivityEditAlarmBinding
+import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.helper.picker.DatePickerFragment
 import rk.enkidu.hiparent.logic.helper.picker.TimePickerFragment
+import rk.enkidu.hiparent.logic.viewmodel.AlarmViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener, TimePickerFragment.DialogTimeListener {
+class EditAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener, TimePickerFragment.DialogTimeListener {
 
-    private var _binding: ActivityAddAlarmBinding? = null
+    private var _binding : ActivityEditAlarmBinding? = null
     private val binding get() = _binding
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
 
+    //setup viewModel
+    private lateinit var alarmViewModel: AlarmViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityAddAlarmBinding.inflate(layoutInflater)
+        _binding = ActivityEditAlarmBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         //close loading
@@ -39,6 +50,15 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
         //setup firebase auth
         auth = Firebase.auth
         db = Firebase.database
+
+        //setup viewModel
+        alarmViewModel = ViewModelProvider(this@EditAlarmActivity, ViewModelFactory.getInstance(auth))[AlarmViewModel::class.java]
+
+        //get data
+        val detailData = intent.getParcelableExtra<Alarm>(DATA) as Alarm
+
+        //show data
+        showData(detailData)
 
         //close top bar
         setupView()
@@ -50,13 +70,19 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
         setTime()
 
         //upload alarm
-        uploadAlarm()
+        updateAlarm(detailData.id!!)
     }
 
-    private fun uploadAlarm() {
-        binding?.btnAddAlarm?.setOnClickListener {
-            val ref = db.reference.child("Alarm")
+    private fun showData(detailData: Alarm) {
+        binding?.etTitle?.setText(detailData.title)
+        binding?.etDesc?.setText(detailData.desc)
+        binding?.tvDateText?.text = detailData.date
+        binding?.tvTimeText?.text = detailData.time
 
+    }
+
+    private fun updateAlarm(id: String) {
+        binding?.btnUpdateAlarm?.setOnClickListener {
             val date = binding?.tvDateText?.text.toString()
             val time = binding?.tvTimeText?.text.toString()
             val title = binding?.etTitle?.text.toString()
@@ -76,39 +102,49 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
                     binding?.etlDesc?.error = getString(R.string.max_desc_alarm)
                 }
                 date == getString(R.string.date_fake) -> {
-                    Toast.makeText(this@AddAlarmActivity, getString(R.string.date_error), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditAlarmActivity, getString(R.string.date_error), Toast.LENGTH_SHORT).show()
                 }
                 time == getString(R.string.time_fake) -> {
-                    Toast.makeText(this@AddAlarmActivity, getString(R.string.time_error), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditAlarmActivity, getString(R.string.time_error), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    val id = ref.push().key
-                    showLoading(true)
+                    AlertDialog.Builder(this@EditAlarmActivity).apply {
+                        setTitle(getString(R.string.alert))
+                        setMessage(getString(R.string.update_confirm))
+                        setNegativeButton(getString(R.string.no)){ _, _ -> }
+                        setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            showLoading(true)
+                            alarmViewModel.update(id, date, time, title, desc)
 
-                    val alarm = Alarm(
-                        id, date, time, title, auth.currentUser?.uid
-                    )
-                    ref.child(id!!).setValue(alarm){ error,_ ->
-                        if(error != null){
-                            showLoading(false)
-                            Toast.makeText(this@AddAlarmActivity, getString(R.string.add_alarm_fail), Toast.LENGTH_SHORT).show()
-                        } else {
-                            showLoading(false)
-                            Toast.makeText(this@AddAlarmActivity, getString(R.string.add_alarm_success), Toast.LENGTH_SHORT).show()
-                            finish()
+                            Toast.makeText(this@EditAlarmActivity, getString(R.string.alarm_update_success), Toast.LENGTH_SHORT).show()
+
+                            CoroutineScope(Dispatchers.Main).launch {
+                                delay(2000)
+                                showLoading(false)
+                                finish()
+                            }
                         }
-
+                        create()
+                        show()
                     }
-
                 }
             }
         }
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun setTime() {
         binding?.ivTime?.setOnClickListener {
             val timePickerFragmentOne = TimePickerFragment()
-            timePickerFragmentOne.show(supportFragmentManager, TIME_PICKER_ONCE_TAG)
+            timePickerFragmentOne.show(supportFragmentManager,
+                TIME_PICKER_ONCE_TAG
+            )
         }
     }
 
@@ -117,11 +153,6 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
             val datePickerFragment = DatePickerFragment()
             datePickerFragment.show(supportFragmentManager, DATE_PICKER_TAG)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     override fun onDialogDateSet(tag: String?, year: Int, month: Int, dayOfMonth: Int) {
@@ -156,6 +187,8 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
     }
 
     companion object {
+        const val DATA = "extra_data"
+
         private const val DATE_PICKER_TAG = "DatePicker"
         private const val TIME_PICKER_ONCE_TAG = "TimePickerOnce"
     }

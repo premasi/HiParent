@@ -119,6 +119,7 @@
     <string name="delete">Delete</string>
     <string name="update_confirm">Are you sure you want to change the post?</string>
     <string name="delete_confirm">Are you sure you want to delete the post?</string>
+    <string name="update_success_discuss">Discussion update</string>
 
     <!-- Detail Activity   -->
     <string name="delete_success">Post successfully deleted</string>
@@ -155,5 +156,9 @@
     <string name="add_alarm_fail">Activity failed to add</string>
     <string name="add_alarm_success">Activity success to add</string>
     <string name="no_schedule">There is no schedule</string>
+    <string name="max_desc_alarm">Maximum 500 word</string>
+    <string name="update_alarm_confirm">Are you sure you want to change the schedule?</string>
+    <string name="delete_alarm_confirm">Are you sure you want to delete the schedule?</string>
+    <string name="alarm_update_success">Schedule update</string>
 
 </resources>

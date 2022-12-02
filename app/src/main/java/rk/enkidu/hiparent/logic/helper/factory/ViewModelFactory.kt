@@ -16,8 +16,8 @@ class ViewModelFactory (private val repository: Repository) : ViewModelProvider.
             return LoginViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)){
             return ProfileViewModel(repository) as T
-        } else if (modelClass.isAssignableFrom(EditDiscussionViewModel::class.java)){
-            return EditDiscussionViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(DiscussionViewModel::class.java)){
+            return DiscussionViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(CommentsViewModel::class.java)){
             return CommentsViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(AlarmViewModel::class.java)){

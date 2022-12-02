@@ -35,9 +35,9 @@ class AlarmFragment : Fragment() {
 
     private lateinit var adapter: AlarmAdapter
 
-    private lateinit var alarmViewModel: AlarmViewModel
-
     private lateinit var alarmReceiver: AlarmReceiver
+
+    private lateinit var alarmViewModel: AlarmViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,7 @@ class AlarmFragment : Fragment() {
         alarmReceiver = AlarmReceiver()
 
         //setup viewModel
-        alarmViewModel = ViewModelProvider(viewModelStore, ViewModelFactory.getInstance(auth))[AlarmViewModel::class.java]
+        alarmViewModel = ViewModelProvider(this@AlarmFragment, ViewModelFactory.getInstance(auth))[AlarmViewModel::class.java]
 
         //go to add schedule
         goToAdd()
@@ -71,33 +71,32 @@ class AlarmFragment : Fragment() {
         //show data
         showData()
 
-        //fetch data to alarm
-//        fetchData()
-
+        //fetch data
+        fetchData()
     }
 
-//    private fun fetchData() {
-//        alarmViewModel.fetchAlarm()
-//
-//        alarmViewModel.data.observe(requireActivity()){
-//            if (it != null){
-//                for(i in it.indices){
-//                    val uidRemote = it[i].uid
-//                    val title = it[i].title
-//                    val date = it[i].date
-//                    val time = it[i].time
-//
-//                    if (uidRemote == auth.currentUser?.uid){
-//                        sendToRemote(title, date, time)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private fun fetchData() {
+        alarmViewModel.fetchAlarm()
 
-//    private fun sendToRemote(title: String?, date: String?, time: String?) {
-//        alarmReceiver.setOntimeAlarm(requireActivity(), AlarmReceiver.TYPE_ONE_TIME,  date!!, time!!, title!!)
-//    }
+        alarmViewModel.data.observe(requireActivity()){
+            if(it != null){
+                for(i in it.indices){
+//                    val date = it[i].date
+                    val time = it[i].time
+                    val title = it[i].title
+                    val desc = it[i].desc
+                    val uid = it[i].uid
+
+                    if(uid == auth.currentUser?.uid){
+                        //send to alarm
+                        alarmReceiver.setRepeatAlarm(requireContext(), title!!,
+                            time!!, desc!!)
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun showData() {
         val ref = db.reference.child("Alarm")
@@ -111,12 +110,8 @@ class AlarmFragment : Fragment() {
                     for(data in snapshot.children){
                         val someData = data.getValue(Alarm::class.java)
 
-                        //send to alarm
-                        alarmReceiver.setOntimeAlarm(context!!, AlarmReceiver.TYPE_ONE_TIME, someData?.date!!,
-                            someData.time!!, someData.title!!)
-
                         val list = ArrayList<Alarm>()
-                        list.add(someData)
+                        list.add(someData!!)
 
                         adapter.setList(list)
                     }
@@ -147,12 +142,6 @@ class AlarmFragment : Fragment() {
             val intent = Intent(activity, AddAlarmActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        showData()
-//        fetchData()
     }
 
     private fun showLoading(isLoading: Boolean){ binding?.pbAlarm?.visibility = if (isLoading) View.VISIBLE else View.GONE }
