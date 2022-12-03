@@ -1,5 +1,6 @@
 package rk.enkidu.hiparent.ui.home.edit
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,7 @@ import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.helper.picker.DatePickerFragment
 import rk.enkidu.hiparent.logic.helper.picker.TimePickerFragment
 import rk.enkidu.hiparent.logic.viewmodel.AlarmViewModel
+import rk.enkidu.hiparent.ui.home.HomeActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,6 +40,8 @@ class EditAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
 
     //setup viewModel
     private lateinit var alarmViewModel: AlarmViewModel
+
+    private var timeMillis: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +75,43 @@ class EditAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
 
         //upload alarm
         updateAlarm(detailData.id!!)
+
+        //delete alarm
+        deleteAlarm(detailData.id)
+
+        //close
+        close()
+    }
+
+    private fun close() {
+        binding?.ivBack?.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun deleteAlarm(id: String) {
+        binding?.btnDeleteAlarm?.setOnClickListener {
+            AlertDialog.Builder(this@EditAlarmActivity).apply {
+                setTitle(getString(R.string.alert))
+                setMessage(getString(R.string.delete_alarm_message))
+                setNegativeButton(getString(R.string.no)){ _, _ -> }
+                setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    showLoading(true)
+                    alarmViewModel.delete(id)
+
+                    Toast.makeText(this@EditAlarmActivity, getString(R.string.delete_message), Toast.LENGTH_SHORT).show()
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(2000)
+                        showLoading(false)
+                        intent = Intent(this@EditAlarmActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+                create()
+                show()
+            }
+        }
     }
 
     private fun showData(detailData: Alarm) {
@@ -114,14 +155,15 @@ class EditAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                         setNegativeButton(getString(R.string.no)){ _, _ -> }
                         setPositiveButton(getString(R.string.yes)) { _, _ ->
                             showLoading(true)
-                            alarmViewModel.update(id, date, time, title, desc)
+                            alarmViewModel.update(id, date, time, timeMillis!!, title, desc)
 
                             Toast.makeText(this@EditAlarmActivity, getString(R.string.alarm_update_success), Toast.LENGTH_SHORT).show()
 
                             CoroutineScope(Dispatchers.Main).launch {
                                 delay(2000)
                                 showLoading(false)
-                                finish()
+                                intent = Intent(this@EditAlarmActivity, HomeActivity::class.java)
+                                startActivity(intent)
                             }
                         }
                         create()
@@ -168,6 +210,7 @@ class EditAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        timeMillis = calendar.timeInMillis
 
         when (tag) {
             TIME_PICKER_ONCE_TAG -> binding?.tvTimeText?.text = dateFormat.format(calendar.time)

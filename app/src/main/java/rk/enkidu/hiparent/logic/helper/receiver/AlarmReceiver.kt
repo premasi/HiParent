@@ -32,7 +32,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_baseline_access_time_24)
+            .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
             .setContentTitle(title)
             .setContentText(message)
             .setColor(ContextCompat.getColor(context, android.R.color.transparent))
@@ -53,28 +53,35 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManager.notify(ONE_TIME_ID, builder.build())
     }
 
-    fun setOntimeAlarm(context: Context, title: String, date: String, time: String, message: String){
+    fun setOntimeAlarm(context: Context, title: String, date: String, time: String, milis: Long, message: String){
         if(isDateInvalid(date, DATE_FORMAT) || isDateInvalid(time, TIME_FORMAT)) return
+        val nowMillis = System.currentTimeMillis()
+        println("$nowMillis, $milis")
 
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE, message)
-        intent.putExtra(EXTRA_TITLE, title)
+        if (nowMillis < milis) {
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, AlarmReceiver::class.java)
+            intent.putExtra(EXTRA_MESSAGE, message)
+            intent.putExtra(EXTRA_TITLE, title)
 
-        Log.e("ONE TIME", "$date $time")
-        val dateArray = date.split("-").toTypedArray()
-        val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            Log.e("ONE TIME", "$date $time")
+            val dateArray = date.split("-").toTypedArray()
+            val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
-        val calender = Calendar.getInstance()
-        calender.set(Calendar.YEAR, Integer.parseInt(dateArray[0]))
-        calender.set(Calendar.MONTH, Integer.parseInt(dateArray[1]) - 1)
-        calender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[2]))
-        calender.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
-        calender.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
-        calender.set(Calendar.SECOND, 0)
+            val calender = Calendar.getInstance()
+            calender.set(Calendar.YEAR, Integer.parseInt(dateArray[0]))
+            calender.set(Calendar.MONTH, Integer.parseInt(dateArray[1]) - 1)
+            calender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[2]))
+            calender.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
+            calender.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
+            calender.set(Calendar.SECOND, 0)
 
-        val pendingIntent = PendingIntent.getBroadcast(context, ONE_TIME_ID, intent, PendingIntent.FLAG_IMMUTABLE)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calender.timeInMillis, pendingIntent)
+
+            val pendingIntent = PendingIntent.getBroadcast(context, milis.toInt(), intent, PendingIntent.FLAG_IMMUTABLE)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calender.timeInMillis, pendingIntent)
+        }
+
+
     }
 
     private fun isDateInvalid(date: String, timeFormat: String): Boolean {

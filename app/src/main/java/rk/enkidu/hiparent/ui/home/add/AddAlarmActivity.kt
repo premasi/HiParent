@@ -1,5 +1,6 @@
 package rk.enkidu.hiparent.ui.home.add
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import rk.enkidu.hiparent.data.entity.remote.Alarm
 import rk.enkidu.hiparent.databinding.ActivityAddAlarmBinding
 import rk.enkidu.hiparent.logic.helper.picker.DatePickerFragment
 import rk.enkidu.hiparent.logic.helper.picker.TimePickerFragment
+import rk.enkidu.hiparent.ui.home.HomeActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +29,8 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
+
+    private var timeMillis: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,15 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
 
         //upload alarm
         uploadAlarm()
+
+        //close
+        close()
+    }
+
+    private fun close() {
+        binding?.ivBack?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun uploadAlarm() {
@@ -86,7 +99,7 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
                     showLoading(true)
 
                     val alarm = Alarm(
-                        id, date, time, title, auth.currentUser?.uid
+                        id, date, time, timeMillis, title, desc, auth.currentUser?.uid
                     )
                     ref.child(id!!).setValue(alarm){ error,_ ->
                         if(error != null){
@@ -95,7 +108,8 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
                         } else {
                             showLoading(false)
                             Toast.makeText(this@AddAlarmActivity, getString(R.string.add_alarm_success), Toast.LENGTH_SHORT).show()
-                            finish()
+                            intent = Intent(this@AddAlarmActivity, HomeActivity::class.java)
+                            startActivity(intent)
                         }
 
                     }
@@ -137,9 +151,13 @@ class AddAlarmActivity : AppCompatActivity(), DatePickerFragment.DialogDateListe
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        timeMillis = calendar.timeInMillis
 
         when (tag) {
             TIME_PICKER_ONCE_TAG -> binding?.tvTimeText?.text = dateFormat.format(calendar.time)
+            else -> {
+
+            }
         }
     }
 

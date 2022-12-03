@@ -91,6 +91,7 @@
     <string name="edit">Edit</string>
 
     <!--  Add New Disucss Activity -->
+    <string name="add_discuss">Add Discussion</string>
     <string name="title">Title</string>
     <string name="input_title">Input title</string>
     <string name="input_desc">Input description</string>
@@ -120,6 +121,7 @@
     <string name="update_confirm">Are you sure you want to change the post?</string>
     <string name="delete_confirm">Are you sure you want to delete the post?</string>
     <string name="update_success_discuss">Discussion update</string>
+    <string name="edit_discuss">Edit Discussion</string>
 
     <!-- Detail Activity   -->
     <string name="delete_success">Post successfully deleted</string>
@@ -160,5 +162,8 @@
     <string name="update_alarm_confirm">Are you sure you want to change the schedule?</string>
     <string name="delete_alarm_confirm">Are you sure you want to delete the schedule?</string>
     <string name="alarm_update_success">Schedule update</string>
-
+    <string name="delete_alarm_message">Are you sure want to delete schedule?</string>
+    <string name="delete_message">Schedule was deleted</string>
+    <string name="add_schedule_title">Add Schedule</string>
+    <string name="edit_schedule">Edit Schedule</string>
 </resources>

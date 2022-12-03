@@ -58,6 +58,15 @@ class EditDiscussionActivity : AppCompatActivity() {
         
         //delete data
         deleteData(postDetail.id.toString())
+
+        //close
+        close()
+    }
+
+    private fun close() {
+        binding?.ivBack?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun deleteData(id: String) {

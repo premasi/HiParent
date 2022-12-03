@@ -81,16 +81,19 @@ class AlarmFragment : Fragment() {
         alarmViewModel.data.observe(requireActivity()){
             if(it != null){
                 for(i in it.indices){
-//                    val date = it[i].date
+                    val date = it[i].date
                     val time = it[i].time
                     val title = it[i].title
                     val desc = it[i].desc
                     val uid = it[i].uid
+                    val milis = it[i].milis
+
+                    println("get title $title, desc $desc")
 
                     if(uid == auth.currentUser?.uid){
                         //send to alarm
-                        alarmReceiver.setRepeatAlarm(requireContext(), title!!,
-                            time!!, desc!!)
+                        alarmReceiver.setOntimeAlarm(requireActivity(), title!!, date!!,
+                            time!!, milis!!, desc!!)
                     }
                 }
             }
@@ -135,6 +138,12 @@ class AlarmFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showData()
+        fetchData()
     }
 
     private fun goToAdd(){

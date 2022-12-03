@@ -43,6 +43,15 @@ class AddNewDiscussActivity : AppCompatActivity() {
 
         //upload data
         uploadDiscussion(auth, db)
+
+        //close
+        close()
+    }
+
+    private fun close() {
+        binding?.ivBack?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun uploadDiscussion(auth: FirebaseAuth, db: FirebaseDatabase) {

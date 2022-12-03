@@ -12,6 +12,8 @@ class AlarmViewModel(private val repository: Repository): ViewModel() {
 
     fun fetchAlarm() = repository.fetchAlarm(_data)
 
-    fun update(id: String, date: String, time: String, title: String, desc: String) = repository
-        .updateAlarm(id, date, time, title, desc)
+    fun update(id: String, date: String, time: String, millis: Long, title: String, desc: String) = repository
+        .updateAlarm(id, date, time, millis, title, desc)
+
+    fun delete(id: String) = repository.deleteAlarm(id)
 }

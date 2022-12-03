@@ -167,14 +167,20 @@ class Repository(private val auth: FirebaseAuth) {
         })
     }
 
-    fun updateAlarm(id: String, date: String, time: String, title: String, desc: String){
+    fun updateAlarm(id: String, date: String, time: String, milis: Long, title: String, desc: String){
         val db = Firebase.database
         val ref = db.reference.child("Alarm")
         ref.child(id).child("title").setValue(title)
         ref.child(id).child("desc").setValue(desc)
         ref.child(id).child("date").setValue(date)
         ref.child(id).child("time").setValue(time)
+        ref.child(id).child("milis").setValue(milis)
 
+    }
+
+    fun deleteAlarm(id: String){
+        val ref = FirebaseDatabase.getInstance().getReference("Alarm").child(id)
+        ref.removeValue()
     }
 
 }

@@ -10,6 +10,7 @@ data class Alarm(
     val id: String? = null,
     val date: String? = null,
     val time: String? = null,
+    val milis: Long? = null,
     val title: String? = null,
     val desc: String? = null,
     val uid: String? = null

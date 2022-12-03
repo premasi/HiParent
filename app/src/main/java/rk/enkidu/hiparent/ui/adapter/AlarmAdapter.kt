@@ -19,7 +19,7 @@ class AlarmAdapter: RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
     inner class ViewHolder(private val item: ListAlarmBinding): RecyclerView.ViewHolder(item.root){
         fun bind(data: Alarm){
             item.tvTitleList.text = data.title
-//            item.tvDate.text = data.date
+            item.tvDate.text = data.date
             item.tvTime.text = data.time
 
             itemView.setOnClickListener {

@@ -102,6 +102,7 @@
     <string name="upload_success">Diskusi berhasil diunggah</string>
     <string name="upload_failed">Diskusi gagal diunggah</string>
     <string name="by">Dibuat oleh</string>
+    <string name="add_discuss">Tambah Diskusi</string>
 
     <!-- OnBoarding Activity   -->
     <string name="welcome_boarding_1">Selamat Datang Parent</string>
@@ -114,6 +115,7 @@
     <string name="next">Selanjutnya</string>
 
     <!-- Edit Activity   -->
+    <string name="edit_discuss">Edit Diskusi</string>
     <string name="update">Ubah</string>
     <string name="delete">Hapus</string>
     <string name="update_confirm">Apakah anda yaking ingin merubah postingan?</string>
@@ -159,6 +161,10 @@
     <string name="update_alarm_confirm">Apakah anda yaking ingin merubah jadwal?</string>
     <string name="delete_alarm_confirm">Apakah anda yakin ingin menghapus jadwal?</string>
     <string name="alarm_update_success">Jadwal diperbarui</string>
+    <string name="delete_alarm_message">Apakah anda yakin ingin menghapus jadwal?</string>
+    <string name="delete_message">Jadwal terhapus</string>
+    <string name="add_schedule_title">Tambah Jadwal</string>
+    <string name="edit_schedule">Edit Jadwal</string>
 
 
 </resources>
