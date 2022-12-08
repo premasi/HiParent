@@ -28,4 +28,18 @@ HiParent merupakan aplikasi berbasis mobile yang dirancang untuk membantu para o
   - Android
   - Internet connection
 
+- Installation
+  - Download the APK
+  - Install the APK
+ 
+- Register
+  - Register your email address
 
+## Contact <br />
+
+| Name  | Email |
+| ------------- | ------------- |
+| Hagi matahari Julio  | A132X0227  |
+| Raka Ryandra Guntara  | <a href="https://www.linkedin.com/in/raka-ryandra-guntara-b23698227" class="button" >LinkedIn</a>  |
+| Zenita Ulfatihasanah  | A132Y0237  |
+| M.Ihsan Edisa Putra  | A132X0230  |
