@@ -1,4 +1,13 @@
-# HiParent
+# **HiParent**
+
+## Team Members
+
+### Team ID: C22-178.
+
+| Name  | Student ID |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 HiParent adalah sebuah aplikasi bagi para orang tua dalam merawat sang buah hati, dengan aplikasi HiParent orang tua bisa berbagi pendapat dan mendapatkan informasi baru mengenai merawat sang buah hati. <br />
 
@@ -8,7 +17,3 @@ Raka Ryandra Guntara (Membuat fitur authentifikasi, diskusi, menampilkan tips, p
 M.Ihsan Edisa Putra (Mencari materi untuk tips parenting usia 13 - 17 tahun) <br />
 Zenita Ulfatihasanah (Mencari materi untuk tips parenting usia 0 - 5 tahun, 6 - 12 tahun, dan menuliskan dokumen yang dibutuhkan)
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
