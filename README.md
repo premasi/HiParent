@@ -25,7 +25,7 @@ HiParent merupakan aplikasi berbasis mobile yang dirancang untuk membantu para o
 
 ## App Overview <br />
 - Prerequisites
-- - Android
-- - Internet connection
+  - Android
+  - Internet connection
 
 
