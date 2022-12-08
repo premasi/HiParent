@@ -15,7 +15,7 @@
 
 | Name  | Jobdesk |
 | ------------- | ------------- |
-| Hagi matahari Julio  | -  Membuat fitur SplashScreen <br /> - Membuat fitur SplashScreen OnBoarding Page <br /> - Video Editor|
+| Hagi matahari Julio  | -  Membuat fitur SplashScreen <br /> - Membuat fitur OnBoarding Page <br /> - Video Editor|
 | Raka Ryandra Guntara  | -  Membuat fitur Authentifikasi <br /> -  Membuat fitur Diskusi <br /> -  Membuat fitur Tips <br /> -  Membuat fitur Alarm <br /> -  Membuat fitur Profile <br /> -  Membuat fitur Settings  |
 | Zenita Ulfatihasanah  | - Mencari materi untuk tips parenting usia 0 - 5 tahun <br /> -  Mencari materi untuk tips parenting usia 6 - 12 tahun <br /> -  Dokumentasi  |
 | M.Ihsan Edisa Putra  | - Mencari materi untuk tips parenting usia 13 - 17 tahun  |
