@@ -11,8 +11,6 @@
 | Zenita Ulfatihasanah  | A132Y0237  |
 | M.Ihsan Edisa Putra  | A132X0230  |
 
-<br />
-
 ### Jobdesk <br />
 
 | Name  | Jobdesk |
