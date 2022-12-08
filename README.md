@@ -39,7 +39,7 @@ HiParent merupakan aplikasi berbasis mobile yang dirancang untuk membantu para o
 
 | Name  | LinkedIn |
 | ------------- | ------------- |
-| Hagi matahari Julio  | <a href="Ihsanmhd1206@gmail.com" class="button" >LinkedIn</a>  |
+| Hagi matahari Julio  |📱 <a href="Ihsanmhd1206@gmail.com" class="button" >LinkedIn</a>  |
 | Raka Ryandra Guntara  |📱 <a href="https://www.linkedin.com/in/raka-ryandra-guntara-b23698227" class="button" >LinkedIn</a>  |
-| Zenita Ulfatihasanah  |📱 <a href="Ihsanmhd1206@gmail.com" class="button" >LinkedIn</a>  | 
+| Zenita Ulfatihasanah  |📱 <a href="[Ihsanmhd1206@gmail.com](https://www.linkedin.com/in/m-ihsan-edisa-putra-379172251/)" class="button" >LinkedIn</a>  | 
 | M.Ihsan Edisa Putra  |📱 <a href="Ihsanmhd1206@gmail.com" class="button" >LinkedIn</a>  |
