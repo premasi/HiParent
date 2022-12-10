@@ -2,6 +2,7 @@
 
 package rk.enkidu.hiparent.ui.forum.detail
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,8 @@ import rk.enkidu.hiparent.data.entity.remote.Message
 import rk.enkidu.hiparent.databinding.ActivityDetailCommentBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.CommentsViewModel
+import rk.enkidu.hiparent.ui.forum.ForumActivity
+import rk.enkidu.hiparent.ui.home.HomeActivity
 
 class DetailCommentActivity : AppCompatActivity() {
 
@@ -87,6 +90,11 @@ class DetailCommentActivity : AppCompatActivity() {
 
                     Toast.makeText(this@DetailCommentActivity, getString(R.string.delete_comment_message_success), Toast.LENGTH_SHORT).show()
                     finish()
+                    intent = Intent(this@DetailCommentActivity, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    intent = Intent(this@DetailCommentActivity, ForumActivity::class.java)
+                    startActivity(intent)
                 }
                 create()
                 show()

@@ -45,6 +45,7 @@ class DetailActivity : AppCompatActivity() {
 
         //show loading
         showLoading(true)
+        showEmpty(false)
 
         //close top bar
         setupView()
@@ -58,6 +59,7 @@ class DetailActivity : AppCompatActivity() {
 
         //show data
         showData(dataDetail)
+
         
         //show comments
         showComments(dataDetail.id.toString())
@@ -82,6 +84,7 @@ class DetailActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                if(snapshot.exists()){
                    adapter = CommentAdapter()
+                   showEmpty(false)
 
                    for(data in snapshot.children){
                        val someData = data.getValue(Message::class.java)
@@ -95,6 +98,11 @@ class DetailActivity : AppCompatActivity() {
                    val manager = LinearLayoutManager(this@DetailActivity)
                    binding?.rvMessage?.layoutManager = manager
                    binding?.rvMessage?.adapter = adapter
+               } else {
+                   CoroutineScope(Dispatchers.Main).launch {
+                       delay(1000)
+                       showEmpty(true)
+                   }
                }
             }
 
@@ -156,11 +164,14 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean){ binding?.pbDetail?.visibility = if (isLoading) View.VISIBLE else View.GONE }
 
+    private fun showEmpty(isLoading: Boolean){ binding?.tvEmpty?.visibility = if (isLoading) View.VISIBLE else View.GONE }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
         CoroutineScope(Dispatchers.Main).cancel()
     }
+
 
     private fun setupView() {
         @Suppress("DEPRECATION")

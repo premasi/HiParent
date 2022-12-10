@@ -62,6 +62,7 @@ class MyPostFragment : Fragment() {
                 showLoading(false)
                 if(snapshot.exists()){
                     adapter = DiscussionPrivateAdapter()
+                    showEmpty(false)
 
                     for(data in snapshot.children){
                         val someData = data.getValue(Discussion::class.java)

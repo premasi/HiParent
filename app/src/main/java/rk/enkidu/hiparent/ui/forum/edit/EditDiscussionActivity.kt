@@ -2,6 +2,7 @@
 
 package rk.enkidu.hiparent.ui.forum.edit
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,8 @@ import rk.enkidu.hiparent.data.entity.remote.Discussion
 import rk.enkidu.hiparent.databinding.ActivityEditDiscussionBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.DiscussionViewModel
+import rk.enkidu.hiparent.ui.forum.ForumActivity
+import rk.enkidu.hiparent.ui.home.HomeActivity
 
 class EditDiscussionActivity : AppCompatActivity() {
 
@@ -81,9 +84,15 @@ class EditDiscussionActivity : AppCompatActivity() {
 
                     Toast.makeText(this@EditDiscussionActivity, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
                     CoroutineScope(Dispatchers.Main).launch {
+
                         delay(2000)
                         showLoading(false)
                         finish()
+                        intent = Intent(this@EditDiscussionActivity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        intent = Intent(this@EditDiscussionActivity, ForumActivity::class.java)
+                        startActivity(intent)
                     }
                 }
                 create()

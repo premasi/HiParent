@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
     private lateinit var dots: ArrayList<TextView>
     private val list = ArrayList<Banner>()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +70,7 @@ class HomeFragment : Fragment() {
         //go to teen tips
         goToTeen()
     }
+
 
     private fun goToTeen() {
         binding?.btnTipsTeen?.setOnClickListener {

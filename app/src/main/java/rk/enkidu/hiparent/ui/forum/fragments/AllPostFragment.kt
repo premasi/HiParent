@@ -64,6 +64,7 @@ class AllPostFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     adapter = DiscussionAdapter()
+                    showEmpty(false)
 
                     for(data in snapshot.children){
                         val someData = data.getValue(Discussion::class.java)

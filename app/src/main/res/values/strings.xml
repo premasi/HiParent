@@ -130,6 +130,7 @@
     <string name="send_failed">Pesan gagal terikirm</string>
     <string name="send_success">Pesan terikirm</string>
     <string name="no_materi">Tidak ada materi</string>
+    <string name="no_comment">Belum ada komentar</string>
 
     <!-- Reset Password Activity   -->
     <string name="reset_password">Reset Password</string>

@@ -25,12 +25,15 @@ class Repository(private val auth: FirebaseAuth) {
         try{
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             val response = result.user!!
+            val photo = Uri.parse("https://picsum.photos/id/106/200/300")
 
             //save fullname
             UserProfileChangeRequest.Builder()
+                .setPhotoUri(photo)
                 .setDisplayName(fullname).build().also {
                     auth.currentUser?.updateProfile(it)?.await()
                 }
+
 
             auth.signOut()
             emit(Result.Success(response))

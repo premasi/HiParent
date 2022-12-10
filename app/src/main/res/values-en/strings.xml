@@ -131,6 +131,7 @@
     <string name="send_failed">Comment failed to send</string>
     <string name="send_success">Comment success to send</string>
     <string name="no_materi">No material</string>
+    <string name="no_comment">There is no comments</string>
 
     <!-- Reset Password Activity   -->
     <string name="reset_password">Reset Password</string>

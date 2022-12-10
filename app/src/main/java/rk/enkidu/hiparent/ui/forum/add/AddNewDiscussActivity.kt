@@ -77,6 +77,8 @@ class AddNewDiscussActivity : AppCompatActivity() {
                 else -> {
                     val id = discussRef.push().key
                     showLoading(true)
+
+
                     val data = Discussion( id,
                         title, desc, auth.currentUser?.displayName.toString(),
                         auth.currentUser?.photoUrl.toString(), Date().time, auth.currentUser?.uid
