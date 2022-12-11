@@ -33,7 +33,14 @@ HiParent merupakan aplikasi berbasis mobile yang dirancang untuk membantu para o
   - Install the APK
  
 - Register
-  - Register your email address
+  - Register your full name, email address, & password
+
+- Login
+  - Enter your email address & password that already registrated
+
+- Flowchart
+![My Remote Image](https://drive.google.com/file/d/1G65iL4NI9BgcI7vRqrcBL1TrTQ3c3PFa/view?usp=sharing)
+
 
 ## Contact <br />
 
