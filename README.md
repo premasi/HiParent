@@ -39,7 +39,8 @@ HiParent merupakan aplikasi berbasis mobile yang dirancang untuk membantu para o
   - Enter your email address & password that already registrated
 
 - Flowchart <br />
-![My Remote Image](https://drive.google.com/file/d/1G65iL4NI9BgcI7vRqrcBL1TrTQ3c3PFa/view?usp=sharing)
+
+🤜 <a href="https://drive.google.com/file/d/1G65iL4NI9BgcI7vRqrcBL1TrTQ3c3PFa/view?usp=sharing" >Flowchart</a>
 
 
 ## Contact <br />
