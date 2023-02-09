@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package rk.enkidu.hiparent.ui.home
+package rk.enkidu.hiparent.ui.forum.add.home
 
 import android.app.Service
 import android.content.Context
@@ -30,10 +30,10 @@ import rk.enkidu.hiparent.data.preferences.SettingsPreferences
 import rk.enkidu.hiparent.databinding.ActivityHomeBinding
 import rk.enkidu.hiparent.logic.helper.factory.SettingsViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.SettingsViewModel
-import rk.enkidu.hiparent.ui.home.fragments.AlarmFragment
-import rk.enkidu.hiparent.ui.home.fragments.HomeFragment
-import rk.enkidu.hiparent.ui.home.fragments.ProfileFragment
-import rk.enkidu.hiparent.ui.home.fragments.SettingsFragment
+import rk.enkidu.hiparent.ui.forum.add.home.fragments.AlarmFragment
+import rk.enkidu.hiparent.ui.forum.add.home.fragments.HomeFragment
+import rk.enkidu.hiparent.ui.forum.add.home.fragments.ProfileFragment
+import rk.enkidu.hiparent.ui.forum.add.home.fragments.SettingsFragment
 
 class HomeActivity : AppCompatActivity() {
 

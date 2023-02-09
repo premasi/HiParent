@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.HiParent"
-        tools:context=".ui.home.edit.EditAlarmActivity">
+        tools:context=".ui.forum.add.home.edit.EditAlarmActivity">
 
         <ProgressBar
             android:id="@+id/pb_add_alarm"

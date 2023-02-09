@@ -24,7 +24,7 @@ import rk.enkidu.hiparent.databinding.ActivityDetailCommentBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.CommentsViewModel
 import rk.enkidu.hiparent.ui.forum.ForumActivity
-import rk.enkidu.hiparent.ui.home.HomeActivity
+import rk.enkidu.hiparent.ui.forum.add.home.HomeActivity
 
 class DetailCommentActivity : AppCompatActivity() {
 

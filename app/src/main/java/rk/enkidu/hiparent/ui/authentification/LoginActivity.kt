@@ -26,7 +26,7 @@ import rk.enkidu.hiparent.data.result.Result
 import rk.enkidu.hiparent.databinding.ActivityLoginBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.LoginViewModel
-import rk.enkidu.hiparent.ui.home.HomeActivity
+import rk.enkidu.hiparent.ui.forum.add.home.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 

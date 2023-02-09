@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.fragments.AlarmFragment">
+    tools:context=".ui.forum.add.home.fragments.AlarmFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

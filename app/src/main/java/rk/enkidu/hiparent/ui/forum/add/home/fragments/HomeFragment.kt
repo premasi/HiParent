@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package rk.enkidu.hiparent.ui.home.fragments
+package rk.enkidu.hiparent.ui.forum.add.home.fragments
 
 import android.app.Activity
 import android.content.Intent

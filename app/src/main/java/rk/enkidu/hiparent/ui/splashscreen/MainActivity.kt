@@ -13,7 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import rk.enkidu.hiparent.databinding.ActivityMainBinding
-import rk.enkidu.hiparent.ui.home.HomeActivity
+import rk.enkidu.hiparent.ui.forum.add.home.HomeActivity
 import rk.enkidu.hiparent.ui.onboarding.OnBoardingActivity
 
 class MainActivity : AppCompatActivity() {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import rk.enkidu.hiparent.data.entity.remote.Alarm
 import rk.enkidu.hiparent.databinding.ListAlarmBinding
-import rk.enkidu.hiparent.ui.home.edit.EditAlarmActivity
+import rk.enkidu.hiparent.ui.forum.add.home.edit.EditAlarmActivity
 
 class AlarmAdapter: RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
     private val list = ArrayList<Alarm>()

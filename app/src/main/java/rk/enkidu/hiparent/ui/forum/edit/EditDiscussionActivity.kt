@@ -22,7 +22,7 @@ import rk.enkidu.hiparent.databinding.ActivityEditDiscussionBinding
 import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.viewmodel.DiscussionViewModel
 import rk.enkidu.hiparent.ui.forum.ForumActivity
-import rk.enkidu.hiparent.ui.home.HomeActivity
+import rk.enkidu.hiparent.ui.forum.add.home.HomeActivity
 
 class EditDiscussionActivity : AppCompatActivity() {
 

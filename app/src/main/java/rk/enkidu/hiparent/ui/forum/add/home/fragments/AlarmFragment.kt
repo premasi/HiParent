@@ -1,4 +1,4 @@
-package rk.enkidu.hiparent.ui.home.fragments
+package rk.enkidu.hiparent.ui.forum.add.home.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -23,7 +23,7 @@ import rk.enkidu.hiparent.logic.helper.factory.ViewModelFactory
 import rk.enkidu.hiparent.logic.helper.receiver.AlarmReceiver
 import rk.enkidu.hiparent.logic.viewmodel.AlarmViewModel
 import rk.enkidu.hiparent.ui.adapter.AlarmAdapter
-import rk.enkidu.hiparent.ui.home.add.AddAlarmActivity
+import rk.enkidu.hiparent.ui.forum.add.home.add.AddAlarmActivity
 
 class AlarmFragment : Fragment() {
 

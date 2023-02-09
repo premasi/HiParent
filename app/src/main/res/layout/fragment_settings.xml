@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:background="?attr/bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.fragments.SettingsFragment">
+    tools:context=".ui.forum.add.home.fragments.SettingsFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_bahasa"

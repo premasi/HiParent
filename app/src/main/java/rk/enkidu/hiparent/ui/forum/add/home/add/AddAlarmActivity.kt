@@ -1,4 +1,4 @@
-package rk.enkidu.hiparent.ui.home.add
+package rk.enkidu.hiparent.ui.forum.add.home.add
 
 import android.content.Intent
 import android.os.Build
@@ -18,7 +18,7 @@ import rk.enkidu.hiparent.data.entity.remote.Alarm
 import rk.enkidu.hiparent.databinding.ActivityAddAlarmBinding
 import rk.enkidu.hiparent.logic.helper.picker.DatePickerFragment
 import rk.enkidu.hiparent.logic.helper.picker.TimePickerFragment
-import rk.enkidu.hiparent.ui.home.HomeActivity
+import rk.enkidu.hiparent.ui.forum.add.home.HomeActivity
 import java.text.SimpleDateFormat
 import java.util.*
 

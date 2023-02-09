@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/bg"
-    tools:context=".ui.home.fragments.ProfileFragment">
+    tools:context=".ui.forum.add.home.fragments.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.fragments.ProfileFragment">
+        tools:context=".ui.forum.add.home.fragments.ProfileFragment">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
